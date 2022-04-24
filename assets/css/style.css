@@ -107,6 +107,18 @@ body {
 
 }
 
+@media screen and (max-width: 464px) {
+  .btnAdd {
+    position: relative;
+    left: 20px;
+  }
+
+  .btnDel { 
+    position: static;
+    margin: 15px;
+  }
+}
+
 @media screen and (max-width: 412px) {
   .inputBox { 
     font-size: 15px;
@@ -151,6 +163,7 @@ body {
     left: 25px
   }
 }
+
 
 
 .inputBox:focus { 
