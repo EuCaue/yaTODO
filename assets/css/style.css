@@ -184,7 +184,9 @@ body {
 
 .btnDel {
   color: rgb(255, 0, 0);
-  display: inline-block;;
+  display: inline-block;
+  left: 10px;
+  position: relative;
 }
 
 footer { 
