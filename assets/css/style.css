@@ -3,8 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
 
+:root {
+  --bg: #3f3ca0;
+  --btnAddColor: #f7c0a3;
+  --btnAddColorDarker: #d2a58c;
+}
+
 body {
-  background-color: #8D99AE;
+  background-color: var(--bg);
 }
 
 .container { 
@@ -25,14 +31,16 @@ body {
   font-weight: 700;
   color: black;
   border-radius: 5px;
-  border: 2px solid rgb(0, 255, 191);
-  background-color: #F8F32B;
+  /* border: 2px solid rgb(0, 255, 191); */
+  /* background-color: #F8F32B; */
+  background-color: var(--btnAddColor);
   box-shadow: 1px 1px 10px 1px  black;
 }
 
 .btnAdd:hover {
-  background-color: #b1ae1f;
+  /* background-color: #b1ae1f; */
   cursor: pointer;
+  background-color: var(--btnAddColorDarker);
   font-size: 20px;
 }
 
@@ -183,8 +191,9 @@ body {
 }
 
 .btnDel {
-  color: rgb(255, 0, 0);
+  color: #084caa;
   display: inline-block;
+  font-weight: bold;
   left: 10px;
   position: relative;
 }
