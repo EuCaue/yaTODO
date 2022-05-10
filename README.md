@@ -1,4 +1,7 @@
-![yaTODO](https://user-images.githubusercontent.com/69485603/167710410-f035a069-e822-4cfe-ae7a-7f9cea84a7a0.gif)
 # yaTODO
-Yet Another TODO :D
+### Yet Another TODO :D
+
+
+https://user-images.githubusercontent.com/69485603/167710869-fbd30521-4e1d-4af6-95b7-2dac808449ef.mp4
+
 
