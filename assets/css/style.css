@@ -22,7 +22,8 @@ label {
  text-align: center;
  margin: 50px;
  font-size: 1.5em;
- font-family: 'Righteous';
+ font-family: 'Fira Sans';
+ /* font-weight: 'bolder'; */
 }
 
 ::selection { 
@@ -206,7 +207,9 @@ label {
 
 
 .btnDel:hover { 
-  color: red;
+  color: rgb(200, 35, 35);
+  font-family: 'Fira Sans';
+  font-weight: lighter;
 }
 
 
