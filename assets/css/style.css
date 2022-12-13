@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Press+Start+2P&family=Righteous&family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+
+:root {
+  /* --bg: #3f3ca0; */
+  --bg: #36393F;
+  --btnAddColor: #a3b8f7;
+  --btnAddColorDarker: rgb(132, 155, 225);
+}
+
+body {
+  background-color: var(--bg);
+}
+
+label {
+  color: #fff;
+}
+
+.container { 
+ text-align: center;
+ margin: 50px;
+ font-size: 1.5em;
+ font-family: 'Fira Sans';
+ /* font-weight: 'bolder'; */
+}
+
+::selection { 
+  color: lightcyan;
+  background-color: rgb(0, 0, 0);
+}
+
+.btnAdd { 
+  font-size: 17px;
+  font-family: 'Fira Sans';
+  font-weight: 700;
+  color: black;
+  border-radius: 5px;
+  /* border: 2px solid rgb(0, 255, 191); */
+  /* background-color: #F8F32B; */
+  background-color: var(--btnAddColor);
+  box-shadow: 1px 1px 10px 1px  black;
+}
+
+
+.btnAdd:hover {
+  /* background-color: #b1ae1f; */
+  cursor: pointer;
+  background-color: var(--btnAddColorDarker);
+  font-size: 20px;
+}
+
+.inputBox { 
+  border-radius: 5px;
+  border: 2px solid black;
+  display: inline-flex;
+  justify-content: center;
+  margin-left: 150px;
+  padding: 5px;
+  font-family: 'Inter';
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
+  border: 3px solid #2B2D42;
+  flex-wrap: wrap;
+  width: 25%;
+  box-shadow: 1px 1px 5px 1px  black;
+}
+
+.inputBox::placeholder { 
+  font-family: 'Staatliches';
+  text-align: center;
+  color: var(--bg);
+}
+
+@media screen and (max-width: 1053px) {
+  .inputBox {
+    font-size: 20px;
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .inputBox {
+    font-size: 20px;
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .inputBox {
+    font-size: 20px;
+    width: 25%;
+  }
+
+}
+
+@media screen and (max-width: 760px) {
+  .inputBox {
+    font-size: 17px;
+    width: 25%;
+  }
+
+}
+
+@media screen and (max-width: 665px) {
+  .inputBox {
+    font-size: 15px;
+    width: 25%;
+  }
+
+}
+
+@media screen and (max-width: 515px) {
+  .inputBox {
+    font-size: 20px;
+    width: 50%;
+    position: relative;
+    left: -60px;
+  }
+
+}
+
+@media screen and (max-width: 464px) {
+  .btnAdd {
+    position: relative;
+    left: 20px;
+  }
+
+  .btnDel { 
+    position: static;
+    margin: 15px;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  .inputBox { 
+    font-size: 15px;
+    width: 50%;
+  }
+
+  .btnAdd { 
+    position: relative;
+    right: -25px;
+  }
+
+  .btnDel { 
+    position: inherit;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .container { 
+    justify-content: center;
+    align-content: center;
+  }
+  
+  .inputBox { 
+    font-size: 15px;
+    width: 75%;
+    position: relative;
+    right: -50px;
+    margin-left: 100px;
+  }
+
+  .btnAdd { 
+    position: relative; 
+  }
+
+  .btnDel { 
+    position: inherit;
+    margin-bottom: 30px;
+  }
+
+  label {
+    position: relative;
+    left: 25px
+  }
+}
+
+
+
+.inputBox:focus { 
+  outline: none;
+}
+
+
+.list { 
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.list li { 
+  text-align: center;
+}
+
+.btnDel {
+  color: #000000;
+  display: inline-block;
+  font-weight: bold;
+  left: 10px;
+  position: relative;
+}
+
+
+.btnDel:hover { 
+  color: rgb(200, 35, 35);
+  font-family: 'Fira Sans';
+  font-weight: lighter;
+}
+
+
+.taskAdd { 
+  color: #62f7ff;
+}
+
+footer { 
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: rgb(50, 13, 13);
+  text-align: center;
+  font-family: 'Press Start 2P';
+  font-weight: bold;
+}
+
+footer:hover::after { 
+  content: 'Bom dia, como vai?';
+}
