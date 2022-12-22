@@ -19,7 +19,7 @@ export const baseDark = '#191724';
 export const surfaceDark = '#1f1d2e';
 export const textDark = '#e0def4';
 export const pineDark = '#31748f';
-export const highlightLowDark = '#21202e';
+export const highlightLowDark = '#26233a';
 
 // NOTE: light colors
 export const baseLight = '#faf4ed';

@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 interface Theme {
   primary: string;
   text: string;
+  highlight: string;
 }
 
 export default createGlobalStyle<{ theme: Theme }>`
@@ -11,10 +12,14 @@ export default createGlobalStyle<{ theme: Theme }>`
       padding: 0;
       box-sizing: border-box;
       font-family: "Ubuntu", sans-serif;
+      font-weight: 400;
       font-size: 18px;
       outline: 0;
       border: none;
       transition: all 0.2s linear;
+      ::selection {
+background-color: ${(props) => props.theme.highlight};
+}
 }
 
 html, body, #root {

@@ -18,13 +18,9 @@ const themesMap: any = {
 };
 
 export default function App() {
-  const storedTheme = localStorage.getItem('currentTheme') || '{}';
-  const [currentTheme, setCurrentTheme] = useState<string>(
-    'defaultDark' || storedTheme,
-  );
-
+  const storedTheme = localStorage.getItem('currentTheme') || 'defaultDark';
+  const [currentTheme, setCurrentTheme] = useState<string>(storedTheme);
   const theme = themesMap[currentTheme];
-  console.log(theme, currentTheme, storedTheme);
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values

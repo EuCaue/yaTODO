@@ -6,9 +6,10 @@ export const HeaderTodo = styled.header`
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 10;
+  position: sticky;
   flex-wrap: wrap;
   background-color: ${(props) => props.theme.secondary};
-  height: 7vh;
 `;
 
 export const Nav = styled.nav`
@@ -16,7 +17,6 @@ export const Nav = styled.nav`
   width: 100vw;
   justify-content: space-between;
   align-items: center;
-
   flex-wrap: wrap;
   background-color: ${(props) => props.theme.secondary};
   a {
@@ -31,9 +31,6 @@ export const Nav = styled.nav`
     }
   }
 
-  label {
-    padding-left: 0.5vw;
-  }
   select {
     cursor: pointer;
     display: flex;

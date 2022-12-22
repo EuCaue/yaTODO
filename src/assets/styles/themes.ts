@@ -1,4 +1,3 @@
-
 /* eslint-disable import/prefer-default-export */
 import * as colors from './colors';
 
@@ -15,7 +14,7 @@ export const defaultDark: Colors = {
   secondary: `${colors.secondaryDark}`,
   text: `${colors.textDefaultDark}`,
   accentColor: `${colors.accentColorDark}`,
-  highlight: `${colors.highlightDark},`,
+  highlight: `${colors.highlightDark}`,
 };
 
 export const defaultLight: Colors = {

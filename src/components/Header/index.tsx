@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { FaGithub } from 'react-icons/fa';
 
+
 import { HeaderTodo, Nav } from './styled';
 import { useGlobalContext } from '../../utils/GlobalContext';
 
 export default function Header(): JSX.Element {
   const { currentTheme, setCurrentTheme } = useGlobalContext();
+  const storedTheme = localStorage.getItem('currentTheme') || '{}';
+
 
   return (
     <HeaderTodo>
@@ -14,7 +17,7 @@ export default function Header(): JSX.Element {
           Theme
           <select
             name="theme"
-            value={currentTheme}
+            value={storedTheme}
             onChange={(e) => {
               setCurrentTheme(e.target.value);
               localStorage.setItem('currentTheme', e.target.value);
