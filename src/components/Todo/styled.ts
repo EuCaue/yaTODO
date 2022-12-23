@@ -38,7 +38,7 @@ export const Form = styled.form`
   }
 `;
 
-export const TextAreaTodo = styled.textarea`
+export const InputTodo = styled.input`
   display: flex;
   justify-content: center;
   align-self: center;
@@ -48,8 +48,6 @@ export const TextAreaTodo = styled.textarea`
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.secondary};
   font-weight: 500;
-  word-wrap: break-word;
-  word-break: break-word;
   min-width: 25vw;
   min-height: 8vh;
   height: fit-content;
@@ -75,8 +73,13 @@ export const SubmitBtn = styled.button`
 export const TodoFlexWrapper = styled.section`
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-flow: row-reverse wrap;
   gap: 2vw;
-  align-self: self-start;
+  align-self: unset;
   padding-top: 1vw;
+  div:only-child {
+    article:only-child {
+      margin-left: -4vw;
+    }
+  }
 `;

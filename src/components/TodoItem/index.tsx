@@ -17,7 +17,7 @@ export default function TodoItem({
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
-    todosLocal.splice(index, index + 1);
+    todosLocal.splice(index, 1);
     localStorage.setItem('todosss', JSON.stringify(todosLocal));
     setTodos(todosLocal);
   };

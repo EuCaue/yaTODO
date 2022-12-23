@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   Container,
   Form,
-  TextAreaTodo,
+  InputTodo,
   SubmitBtn,
   TodoFlexWrapper,
 } from './styled';
@@ -18,15 +18,19 @@ export default function Todo(): JSX.Element {
   const [, updateState] = React.useState();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  function handleSubmit(event: FormEvent): void {
-    event.preventDefault();
+  function handleSubmit(event?: FormEvent): void {
+    event?.preventDefault();
     setTodos([todo, ...todos]);
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>): void {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTodo(event.target.value);
   }
-
+  const handleKeypress = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ): void => {
+    if (event.code === '13') handleSubmit();
+  };
   useEffect(() => {
     localStorage.setItem('todosss', JSON.stringify(todos));
     forceUpdate();
@@ -35,10 +39,11 @@ export default function Todo(): JSX.Element {
   return (
     <Container>
       <Form onSubmit={(e) => handleSubmit(e)} id="formTodo">
-        <TextAreaTodo
+        <InputTodo
           placeholder='"Pet the cat"'
           required
           form="formTodo"
+          onKeyDown={(e) => handleKeypress(e)}
           onChange={(e) => handleChange(e)}
         />
         <SubmitBtn type="submit">
