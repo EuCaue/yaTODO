@@ -5,8 +5,7 @@ export const Container = styled.section`
   display: flex;
   justify-content: start;
   align-items: center;
-  flex-wrap: wrap;
-  flex-direction: column;
+  flex-flow: column wrap;
   align-self: center;
   margin-top: 2.5vw;
   max-width: 80vw;
@@ -73,13 +72,11 @@ export const SubmitBtn = styled.button`
 export const TodoFlexWrapper = styled.section`
   display: flex;
   justify-content: center;
-  flex-flow: row-reverse wrap;
+  flex-flow: row-reverse wrap-reverse;
   gap: 2vw;
   align-self: unset;
   padding-top: 1vw;
-  div:only-child {
-    article:only-child {
-      margin-left: -4vw;
-    }
+  article:only-child {
+    margin-left: -4vw;
   }
 `;

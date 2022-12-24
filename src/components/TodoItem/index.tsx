@@ -15,7 +15,6 @@ export default function TodoItem({
   const todosLocal = JSON.parse(localStorage.getItem('todosss') || '[]');
 
   const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
     todosLocal.splice(index, 1);
     localStorage.setItem('todosss', JSON.stringify(todosLocal));
@@ -25,7 +24,7 @@ export default function TodoItem({
   return (
     <TodoItemStyle>
       <p>{text}</p>
-      <ButtonTodo type="button" onClick={(e) => handleClick(e)}>
+      <ButtonTodo type="button" onClick={handleClick}>
         <FaCheck />
       </ButtonTodo>
     </TodoItemStyle>

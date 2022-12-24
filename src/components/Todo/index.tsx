@@ -52,11 +52,7 @@ export default function Todo(): JSX.Element {
       </Form>
       <TodoFlexWrapper>
         {todosLocal.map((todoText: string, index: number): JSX.Element => {
-          return (
-            <div key={uuidv4()}>
-              <TodoItem text={todoText} index={index} setTodos={setTodos} />
-            </div>
-          );
+          return <TodoItem text={todoText} index={index} setTodos={setTodos} key={uuidv4()}/>;
         })}
       </TodoFlexWrapper>
     </Container>
