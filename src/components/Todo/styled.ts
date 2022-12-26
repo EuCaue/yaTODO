@@ -80,3 +80,22 @@ export const TodoFlexWrapper = styled.section`
     margin-left: -4vw;
   }
 `;
+
+export const Span = styled.span`
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+`;
+
+export const InputEditTodo = styled.input`
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  width: 25vw;
+  height: 25vh;
+  background-color: ${(props) => props.theme.secondary};
+  color: ${(props) => props.theme.text};
+`;

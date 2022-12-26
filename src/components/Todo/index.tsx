@@ -13,6 +13,7 @@ import {
   InputTodo,
   SubmitBtn,
   TodoFlexWrapper,
+  InputEditTodo,
 } from './styled';
 import TodoItem from '../TodoItem';
 
@@ -24,6 +25,7 @@ export default function Todo(): JSX.Element {
   const forceUpdate = useCallback(() => updateState({}), []);
   const inputTodo = useRef<HTMLInputElement>(null);
   const [showEdit, setShowEdit] = useState<boolean>(false);
+  const [newTodoText, setNewTodoText] = useState<string>();
 
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
@@ -71,10 +73,19 @@ export default function Todo(): JSX.Element {
               setTodos={setTodos}
               showEdit={showEdit}
               setShowEdit={setShowEdit}
+              newTodoText={newTodoText}
               key={crypto.randomUUID()}
             />
           );
         })}
+        {showEdit ? (
+          <InputEditTodo
+            type="text"
+            onChange={(e) => setNewTodoText(e.target.value)}
+          />
+        ) : (
+          <></>
+        )}
       </TodoFlexWrapper>
     </Container>
   );

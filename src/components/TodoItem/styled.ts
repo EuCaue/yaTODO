@@ -22,16 +22,6 @@ export const TodoItemStyle = styled.article`
   }
 `;
 
-export const InputEditTodo = styled.input`
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  text-align: center;
-  background-color: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.text};
-`;
-
 export const TextTodo = styled.p`
   display: flex;
   justify-content: center;
