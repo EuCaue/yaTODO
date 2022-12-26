@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { v4 as uuidv4 } from 'uuid';
 
 import {
   Container,
@@ -24,6 +23,7 @@ export default function Todo(): JSX.Element {
   const [, updateState] = React.useState<unknown>();
   const forceUpdate = useCallback(() => updateState({}), []);
   const inputTodo = useRef<HTMLInputElement>(null);
+  const [showEdit, setShowEdit] = useState<boolean>(false);
 
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
@@ -69,7 +69,9 @@ export default function Todo(): JSX.Element {
               text={todoText}
               index={index}
               setTodos={setTodos}
-              key={uuidv4()}
+              showEdit={showEdit}
+              setShowEdit={setShowEdit}
+              key={crypto.randomUUID()}
             />
           );
         })}

@@ -22,7 +22,24 @@ export const TodoItemStyle = styled.article`
   }
 `;
 
-export const ButtonTodo = styled.button`
+export const InputEditTodo = styled.input`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  background-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.text};
+`;
+
+export const TextTodo = styled.p`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+`;
+
+export const ButtonTodoEdit = styled.button`
   display: flex;
   justify-content: center;
   align-self: center;
@@ -30,7 +47,27 @@ export const ButtonTodo = styled.button`
   background-color: initial;
   cursor: pointer;
   position: absolute;
-  right: 1vw;
+  right: 0vw;
+  transition: all 0.1s linear;
+  color: ${(props) => props.theme.text};
+  :hover {
+    svg {
+      path {
+        fill: ${(props) => props.theme.accentColor};
+      }
+    }
+  }
+`;
+
+export const ButtonTodoCheck = styled.button`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  background-color: initial;
+  cursor: pointer;
+  position: absolute;
+  right: 2vw;
   transition: all 0.1s linear;
   color: ${(props) => props.theme.text};
   :hover {
