@@ -5,15 +5,16 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaEdit } from 'react-icons/fa';
 
 import {
+  ButtonTodoEdit,
   Container,
   Form,
   InputTodo,
   SubmitBtn,
-  TodoFlexWrapper,
   InputEditTodo,
+  TodoFlexWrapper,
 } from './styled';
 import TodoItem from '../TodoItem';
 
@@ -24,8 +25,8 @@ export default function Todo(): JSX.Element {
   const [, updateState] = React.useState<unknown>();
   const forceUpdate = useCallback(() => updateState({}), []);
   const inputTodo = useRef<HTMLInputElement>(null);
-  const [showEdit, setShowEdit] = useState<boolean>(false);
-  const [newTodoText, setNewTodoText] = useState<string>();
+  const [newTodoText, setNewTodoText] = useState<string>('');
+  const [indexState, setIndexState] = useState<number>(0);
 
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
@@ -39,15 +40,34 @@ export default function Todo(): JSX.Element {
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTodo(event.target.value);
   }
+
   const handleKeypress = (
     event: React.KeyboardEvent<HTMLInputElement>,
   ): void => {
     if (event.code === '13') handleSubmit();
   };
+
   useEffect(() => {
     localStorage.setItem('todosss', JSON.stringify(todos));
     forceUpdate();
   }, [forceUpdate, todos]);
+
+  const todosMap: JSX.Element = todosLocal.map(
+    (todoText: string, index: number): JSX.Element => {
+      return (
+        // eslint-disable-next-line react/jsx-key
+        <TodoItem
+          text={todoText}
+          index={index}
+          setTodos={setTodos}
+          setNewTodoText={setNewTodoText}
+          newTodoText={newTodoText}
+          setIndexState={setIndexState}
+          indexState={indexState}
+        />
+      );
+    },
+  );
 
   return (
     <Container>
@@ -64,29 +84,7 @@ export default function Todo(): JSX.Element {
           <FaPlus size={40} />
         </SubmitBtn>
       </Form>
-      <TodoFlexWrapper>
-        {todosLocal.map((todoText: string, index: number): JSX.Element => {
-          return (
-            <TodoItem
-              text={todoText}
-              index={index}
-              setTodos={setTodos}
-              showEdit={showEdit}
-              setShowEdit={setShowEdit}
-              newTodoText={newTodoText}
-              key={crypto.randomUUID()}
-            />
-          );
-        })}
-        {showEdit ? (
-          <InputEditTodo
-            type="text"
-            onChange={(e) => setNewTodoText(e.target.value)}
-          />
-        ) : (
-          <></>
-        )}
-      </TodoFlexWrapper>
+      <TodoFlexWrapper>{todosMap}</TodoFlexWrapper>
     </Container>
   );
 }
