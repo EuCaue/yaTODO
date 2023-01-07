@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './assets/styles/globalStyles';
 import YaTodo from './pages/yaTodo';
@@ -7,24 +7,35 @@ import {
   defaultLight,
   rosePineDarkTheme,
   rosePineLightTheme,
+  Colors,
 } from './assets/styles/themes';
 import { GlobalContext } from './utils/GlobalContext';
 
-const themesMap: any = {
+interface ThemesA {
+  defaultDark: Colors;
+  defaultLight: Colors;
+  rosePineDarkTheme: Colors;
+  rosePineLightTheme: Colors;
+}
+
+const themesMap: ThemesA = {
   defaultDark,
   defaultLight,
   rosePineDarkTheme,
   rosePineLightTheme,
 };
 
-export default function App() {
+export default function App(): JSX.Element {
   const storedTheme = localStorage.getItem('currentTheme') || 'defaultDark';
   const [currentTheme, setCurrentTheme] = useState<string>(storedTheme);
-  const theme = themesMap[currentTheme];
+  const theme: Colors = themesMap[currentTheme];
+  const themesMemo = useMemo(
+    () => ({ currentTheme, setCurrentTheme }),
+    [currentTheme],
+  );
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <GlobalContext.Provider value={{ currentTheme, setCurrentTheme }}>
+    <GlobalContext.Provider value={themesMemo}>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <YaTodo />;

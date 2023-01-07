@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaGithub } from 'react-icons/fa';
-
 
 import { HeaderTodo, Nav } from './styled';
 import { useGlobalContext } from '../../utils/GlobalContext';
 
 export default function Header(): JSX.Element {
-  const { currentTheme, setCurrentTheme } = useGlobalContext();
+  const { setCurrentTheme } = useGlobalContext();
   const storedTheme = localStorage.getItem('currentTheme') || '{}';
-
 
   return (
     <HeaderTodo>

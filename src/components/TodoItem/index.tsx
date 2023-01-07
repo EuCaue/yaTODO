@@ -1,12 +1,12 @@
-import React, { FormEvent, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { FaCheck, FaEdit } from 'react-icons/fa';
 import {
   TodoItemStyle,
   ButtonTodoCheck,
   InputEditTodo,
+  ButtonTodoEditCheck,
   ButtonTodoEdit,
   TextTodo,
-  FormNewTodo,
 } from './styled';
 
 export interface ITodo {
@@ -31,7 +31,7 @@ export default function TodoItem({
   const $buttonEditTodoCheck = useRef<HTMLButtonElement>(null);
   const $buttonEditTodo = useRef<HTMLButtonElement>(null);
   const $currentTextTodo = useRef<HTMLParagraphElement>(null);
-
+  const $buttonCheckTodo = useRef<HTMLButtonElement>(null);
   const todosLocal: string[] = JSON.parse(
     localStorage.getItem('todosss') || '[]',
   );
@@ -50,12 +50,14 @@ export default function TodoItem({
       $buttonEditTodo.current !== null &&
       $buttonEditTodoCheck.current !== null &&
       $inputEditTodo.current !== null &&
-      $currentTextTodo.current !== null
+      $currentTextTodo.current !== null &&
+      $buttonCheckTodo.current !== null
     ) {
       $buttonEditTodoCheck.current.style.display = 'none';
       $inputEditTodo.current.style.display = 'none';
       $buttonEditTodo.current.style.display = 'flex';
       $currentTextTodo.current.style.display = 'flex';
+      $buttonCheckTodo.current.style.display = 'flex';
     }
   };
 
@@ -64,7 +66,8 @@ export default function TodoItem({
       $buttonEditTodo.current !== null &&
       $buttonEditTodoCheck.current !== null &&
       $inputEditTodo.current !== null &&
-      $currentTextTodo.current !== null
+      $currentTextTodo.current !== null &&
+      $buttonCheckTodo.current !== null
     ) {
       setIndexState(index);
       $buttonEditTodoCheck.current.style.display = 'flex';
@@ -72,12 +75,11 @@ export default function TodoItem({
       $inputEditTodo.current.focus();
       $buttonEditTodo.current.style.display = 'none';
       $currentTextTodo.current.style.display = 'none';
+      $buttonCheckTodo.current.style.display = 'none';
     }
   };
 
-  const handleEnter = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ): void => {
+  const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>): void => {
     if (event.keyCode === 13) handleClickEditCheck();
   };
 
@@ -93,16 +95,16 @@ export default function TodoItem({
         onKeyUp={(e) => handleEnter(e)}
         required
       />
-      <ButtonTodoEdit
+      <ButtonTodoEditCheck
         ref={$buttonEditTodoCheck}
         style={{ display: 'none' }}
         type="button"
         onClick={handleClickEditCheck}
       >
         <FaEdit />
-      </ButtonTodoEdit>
+      </ButtonTodoEditCheck>
 
-      <ButtonTodoCheck type="button" onClick={handleClickCheck}>
+      <ButtonTodoCheck type="button" onClick={handleClickCheck} ref={$buttonCheckTodo}>
         <FaCheck />
       </ButtonTodoCheck>
 

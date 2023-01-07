@@ -5,15 +5,13 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
-import { FaPlus, FaEdit } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 
 import {
-  ButtonTodoEdit,
   Container,
   Form,
   InputTodo,
   SubmitBtn,
-  InputEditTodo,
   TodoFlexWrapper,
 } from './styled';
 import TodoItem from '../TodoItem';

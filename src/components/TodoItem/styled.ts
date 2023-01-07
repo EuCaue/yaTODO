@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const FormNewTodo = styled.form`
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
 export const TodoItemStyle = styled.article`
   display: flex;
   justify-content: center;
@@ -57,22 +49,19 @@ export const ButtonTodoEdit = styled.button`
   }
 `;
 
+export const ButtonTodoEditCheck = styled(ButtonTodoEdit)``;
 
 export const InputEditTodo = styled.input`
   position: absolute;
   z-index: 10;
   display: flex;
-  /* right: 0vw; */
   justify-content: center;
   align-self: center;
   align-items: center;
   text-align: center;
-  /* width: 25vw; */
-  /* height: 25vh; */
   background-color: ${(props) => props.theme.secondary};
   color: ${(props) => props.theme.text};
 `;
-
 
 export const ButtonTodoCheck = styled.button`
   display: flex;

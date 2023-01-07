@@ -81,38 +81,3 @@ export const TodoFlexWrapper = styled.section`
     margin-left: -4vw;
   }
 `;
-
-export const InputEditTodo = styled.input`
-  position: absolute;
-  z-index: 10;
-  display: flex;
-  /* right: 0vw; */
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  text-align: center;
-  /* width: 25vw; */
-  /* height: 25vh; */
-  background-color: ${(props) => props.theme.secondary};
-  color: ${(props) => props.theme.text};
-`;
-
-export const ButtonTodoEdit = styled.button`
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  background-color: initial;
-  cursor: pointer;
-  position: absolute;
-  right: 0vw;
-  transition: all 0.1s linear;
-  color: ${(props) => props.theme.text};
-  :hover {
-    svg {
-      path {
-        fill: ${(props) => props.theme.accentColor};
-      }
-    }
-  }
-`;
