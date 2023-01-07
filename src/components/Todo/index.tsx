@@ -5,10 +5,11 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaRegTrashAlt } from 'react-icons/fa';
 
 import {
   Container,
+  DeleteButton,
   Form,
   InputTodo,
   SubmitBtn,
@@ -33,6 +34,11 @@ export default function Todo(): JSX.Element {
       inputTodo.current.value = '';
       inputTodo.current.focus();
     }
+  }
+
+  function handleClickDelete(): void {
+    todosLocal.splice(0, todosLocal.length);
+    setTodos(todosLocal);
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -70,6 +76,12 @@ export default function Todo(): JSX.Element {
   return (
     <Container>
       <Form onSubmit={(e) => handleSubmit(e)} id="formTodo">
+        {/* TODO: make a double check function to delete all todos */}
+        <DeleteButton type="button" onClick={() => handleClickDelete()}>
+          <small>Delete all tasks</small>
+          <FaRegTrashAlt size={40} />
+        </DeleteButton>
+
         <InputTodo
           placeholder='"Pet the cat"'
           required

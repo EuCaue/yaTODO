@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { FaCheck, FaEdit } from 'react-icons/fa';
 import {
   TodoItemStyle,
@@ -42,7 +42,26 @@ export default function TodoItem({
     setTodos(todosLocal);
   };
 
-  const handleClickEditCheck = (): void => {
+  const handleClickEditCheck = (): void | boolean => {
+    // TODO: verify it's a new value is empty or not
+    if (newTodoText === '') {
+      if (
+        $buttonEditTodo.current !== null &&
+        $buttonEditTodoCheck.current !== null &&
+        $inputEditTodo.current !== null &&
+        $currentTextTodo.current !== null &&
+        $buttonCheckTodo.current !== null
+      ) {
+        $buttonEditTodoCheck.current.style.display = 'none';
+        $inputEditTodo.current.style.display = 'none';
+        $buttonEditTodo.current.style.display = 'flex';
+        $currentTextTodo.current.style.display = 'flex';
+        $buttonCheckTodo.current.style.display = 'flex';
+        $inputEditTodo.current.value = text;
+      }
+
+      return true;
+    }
     todosLocal.splice(indexState, 1, newTodoText);
     localStorage.setItem('todosss', JSON.stringify(todosLocal));
     setTodos(todosLocal);
@@ -103,8 +122,11 @@ export default function TodoItem({
       >
         <FaEdit />
       </ButtonTodoEditCheck>
-
-      <ButtonTodoCheck type="button" onClick={handleClickCheck} ref={$buttonCheckTodo}>
+      <ButtonTodoCheck
+        type="button"
+        onClick={handleClickCheck}
+        ref={$buttonCheckTodo}
+      >
         <FaCheck />
       </ButtonTodoCheck>
 

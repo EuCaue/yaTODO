@@ -69,6 +69,33 @@ export const SubmitBtn = styled.button`
   cursor: pointer;
 `;
 
+export const DeleteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  small {
+    display: none;
+    position: absolute;
+    z-index: 10;
+  }
+
+  :hover {
+    small {
+      display: inline;
+      top: 3.5rem;
+      font-size: 12px;
+      color: ${(props) => props.theme.text};
+      font-family: serif;
+      border-radius: 1px;
+      padding: 0.5em;
+      border: 0.5px double ${(props) => props.theme.text};
+    }
+  }
+`;
+
 export const TodoFlexWrapper = styled.section`
   display: flex;
   justify-content: center;
@@ -77,7 +104,4 @@ export const TodoFlexWrapper = styled.section`
   position: relative;
   align-self: unset;
   padding-top: 1vw;
-  article:only-child {
-    margin-left: -4vw;
-  }
 `;
