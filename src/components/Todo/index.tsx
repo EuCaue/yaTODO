@@ -5,7 +5,7 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
-import { FaPlus, FaRegTrashAlt } from 'react-icons/fa';
+import { FaPlus, FaRegTrashAlt, FaExchangeAlt } from 'react-icons/fa';
 
 import {
   Container,
@@ -14,6 +14,7 @@ import {
   InputTodo,
   SubmitBtn,
   TodoFlexWrapper,
+  ButtonExchange,
 } from './styled';
 import TodoItem from '../TodoItem';
 
@@ -26,6 +27,7 @@ export default function Todo(): JSX.Element {
   const inputTodo = useRef<HTMLInputElement>(null);
   const [newTodoText, setNewTodoText] = useState<string>('');
   const [indexState, setIndexState] = useState<number>(0);
+  const [reversedList, setReversedList] = useState<boolean>(false);
 
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
@@ -94,7 +96,13 @@ export default function Todo(): JSX.Element {
           <FaPlus size={40} />
         </SubmitBtn>
       </Form>
-      <TodoFlexWrapper>{todosMap}</TodoFlexWrapper>
+      <TodoFlexWrapper reversedList={reversedList}>{todosMap}</TodoFlexWrapper>
+      <ButtonExchange
+        type="button"
+        onClick={() => setReversedList(!reversedList)}
+      >
+        <FaExchangeAlt size={40} />
+      </ButtonExchange>
     </Container>
   );
 }

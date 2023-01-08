@@ -1,5 +1,10 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
+
+type Props = {
+  reversedList: boolean;
+};
 
 export const Container = styled.section`
   display: flex;
@@ -96,12 +101,31 @@ export const DeleteButton = styled.button`
   }
 `;
 
-export const TodoFlexWrapper = styled.section`
+export const TodoFlexWrapper = styled.section<Props>`
   display: flex;
   justify-content: center;
-  flex-flow: row wrap;
+  flex-flow: ${(props) => (props.reversedList ? 'row-reverse' : 'row')} ${(props) => (props.reversedList ? 'wrap-reverse' : 'wrap')};
   gap: 2vw;
   position: relative;
   align-self: unset;
   padding-top: 1vw;
+`;
+
+export const ButtonExchange = styled.button`
+  display: flex;
+  background: transparent;
+  position: absolute;
+  cursor: pointer;
+  top: 3vh;
+  right: -3.5vw;
+  transition: all 0.1s linear;
+  rotate: 90deg;
+  color: ${(props) => props.theme.text};
+  :hover {
+    svg {
+      path {
+        fill: ${(props) => props.theme.accentColor};
+      }
+    }
+  }
 `;
