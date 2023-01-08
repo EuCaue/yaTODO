@@ -29,7 +29,7 @@ export default function Todo(): JSX.Element {
 
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
-    setTodos([todo, ...todos]);
+    setTodos([...todos, todo]);
     if (inputTodo.current !== null) {
       inputTodo.current.value = '';
       inputTodo.current.focus();

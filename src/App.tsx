@@ -19,7 +19,7 @@ interface ThemesA {
 }
 
 // HACK: use any because any other type not work, fix this in the futere.
-const themesMap: ThemesA = {
+const themesMap: any = {
   defaultDark,
   defaultLight,
   rosePineDarkTheme,

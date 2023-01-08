@@ -99,7 +99,7 @@ export const DeleteButton = styled.button`
 export const TodoFlexWrapper = styled.section`
   display: flex;
   justify-content: center;
-  flex-flow: row-reverse wrap-reverse;
+  flex-flow: row wrap;
   gap: 2vw;
   position: relative;
   align-self: unset;

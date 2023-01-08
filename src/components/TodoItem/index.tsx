@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef } from 'react';
 import { FaCheck, FaEdit } from 'react-icons/fa';
 import {
   TodoItemStyle,
@@ -59,8 +59,7 @@ export default function TodoItem({
         $buttonCheckTodo.current.style.display = 'flex';
         $inputEditTodo.current.value = text;
       }
-
-      return true;
+      return false;
     }
     todosLocal.splice(indexState, 1, newTodoText);
     localStorage.setItem('todosss', JSON.stringify(todosLocal));
@@ -78,6 +77,7 @@ export default function TodoItem({
       $currentTextTodo.current.style.display = 'flex';
       $buttonCheckTodo.current.style.display = 'flex';
     }
+    return true;
   };
 
   const handleClickEdit = () => {
@@ -89,6 +89,7 @@ export default function TodoItem({
       $buttonCheckTodo.current !== null
     ) {
       setIndexState(index);
+      setNewTodoText('');
       $buttonEditTodoCheck.current.style.display = 'flex';
       $inputEditTodo.current.style.display = 'flex';
       $inputEditTodo.current.focus();
