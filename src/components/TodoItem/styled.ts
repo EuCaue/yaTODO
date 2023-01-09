@@ -16,10 +16,6 @@ export const TodoItemStyle = styled.article`
   text-align: center;
   border-radius: 10px;
   position: relative;
-  p {
-    max-width: 99%;
-    font-size: 16px;
-  }
 `;
 
 export const TextTodo = styled.p`
@@ -27,6 +23,14 @@ export const TextTodo = styled.p`
   justify-content: center;
   align-self: center;
   align-items: center;
+  flex-wrap: wrap;
+  text-overflow: clip;
+  /* width: 10em; */
+  font-size: 16px;
+  :after {
+    content: '';
+    white-space: pre-wrap;
+  }
 `;
 
 export const ButtonTodoEdit = styled.button`

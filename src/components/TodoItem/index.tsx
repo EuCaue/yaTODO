@@ -33,12 +33,12 @@ export default function TodoItem({
   const $currentTextTodo = useRef<HTMLParagraphElement>(null);
   const $buttonCheckTodo = useRef<HTMLButtonElement>(null);
   const todosLocal: string[] = JSON.parse(
-    localStorage.getItem('todosss') || '[]',
+    localStorage.getItem('todosLocal') || '[]',
   );
 
   const handleClickCheck = (): void => {
     todosLocal.splice(index, 1);
-    localStorage.setItem('todosss', JSON.stringify(todosLocal));
+    localStorage.setItem('todosLocal', JSON.stringify(todosLocal));
     setTodos(todosLocal);
   };
 
@@ -62,7 +62,7 @@ export default function TodoItem({
       return false;
     }
     todosLocal.splice(indexState, 1, newTodoText);
-    localStorage.setItem('todosss', JSON.stringify(todosLocal));
+    localStorage.setItem('todosLocal', JSON.stringify(todosLocal));
     setTodos(todosLocal);
     if (
       $buttonEditTodo.current !== null &&

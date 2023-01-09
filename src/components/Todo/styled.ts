@@ -53,12 +53,12 @@ export const InputTodo = styled.input`
   background-color: ${(props) => props.theme.secondary};
   font-weight: 500;
   min-width: 25vw;
+  width: fit-content;
   min-height: 8vh;
   height: fit-content;
   border-radius: 10px;
   border: 1px solid ${(props) => props.theme.text};
   font-size: 20px;
-
   :focus,
   :active {
     transition: none;

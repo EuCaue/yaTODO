@@ -19,7 +19,7 @@ import {
 import TodoItem from '../TodoItem';
 
 export default function Todo(): JSX.Element {
-  const todosLocal = JSON.parse(localStorage.getItem('todosss') || '[]');
+  const todosLocal = JSON.parse(localStorage.getItem('todosLocal') || '[]');
   const [todo, setTodo] = useState<string>('');
   const [todos, setTodos] = useState<string[]>(todosLocal || []);
   const [, updateState] = React.useState<unknown>();
@@ -54,7 +54,7 @@ export default function Todo(): JSX.Element {
   };
 
   useEffect(() => {
-    localStorage.setItem('todosss', JSON.stringify(todos));
+    localStorage.setItem('todosLocal', JSON.stringify(todos));
     forceUpdate();
   }, [forceUpdate, todos]);
 
