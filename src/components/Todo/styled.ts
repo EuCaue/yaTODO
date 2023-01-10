@@ -16,9 +16,10 @@ export const Container = styled.section`
   max-width: 80vw;
   width: 55vw;
   min-height: 80vh;
-  border: 5px solid ${(props) => props.theme.text};
   position: relative;
   border-radius: 15px;
+  border: 5px solid ${(props) => props.theme.text};
+
 `;
 
 export const Form = styled.form`
@@ -49,16 +50,16 @@ export const InputTodo = styled.input`
   align-items: center;
   flex-wrap: wrap;
   text-align: center;
-  color: ${(props) => props.theme.text};
-  background-color: ${(props) => props.theme.secondary};
   font-weight: 500;
   min-width: 25vw;
   width: fit-content;
   min-height: 8vh;
   height: fit-content;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.text};
   font-size: 20px;
+  border: 1px solid ${(props) => props.theme.text};
+  color: ${(props) => props.theme.text};
+  background-color: ${(props) => props.theme.secondary};
   :focus,
   :active {
     transition: none;
@@ -92,11 +93,11 @@ export const DeleteButton = styled.button`
       display: inline;
       top: 3.5rem;
       font-size: 12px;
-      color: ${(props) => props.theme.text};
       font-family: serif;
       border-radius: 1px;
       padding: 0.5em;
       border: 0.5px double ${(props) => props.theme.text};
+      color: ${(props) => props.theme.text};
     }
   }
 `;
@@ -104,9 +105,10 @@ export const DeleteButton = styled.button`
 export const TodoFlexWrapper = styled.section<Props>`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-flow: ${(props) => (props.reversedList ? 'row-reverse' : 'row')} ${(props) => (props.reversedList ? 'wrap-reverse' : 'wrap')};
   gap: 2vw;
-  position: relative;
+  /* position: relative; */
   align-self: unset;
   padding-top: 1vw;
 `;

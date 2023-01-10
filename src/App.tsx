@@ -39,7 +39,7 @@ export default function App(): JSX.Element {
     <GlobalContext.Provider value={themesMemo}>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <YaTodo />;
+        <YaTodo />
       </ThemeProvider>
     </GlobalContext.Provider>
   );

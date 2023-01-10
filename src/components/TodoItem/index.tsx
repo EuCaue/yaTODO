@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { FaCheck, FaEdit } from 'react-icons/fa';
 import {
   TodoItemStyle,
+  SpanButtonsTodo,
   ButtonTodoCheck,
   InputEditTodo,
   ButtonTodoEditCheck,
@@ -106,6 +107,22 @@ export default function TodoItem({
   return (
     <TodoItemStyle>
       <TextTodo ref={$currentTextTodo}>{text}</TextTodo>
+      <ButtonTodoCheck
+        type="button"
+        onClick={handleClickCheck}
+        ref={$buttonCheckTodo}
+      >
+        <FaCheck />
+      </ButtonTodoCheck>
+
+      <ButtonTodoEdit
+        ref={$buttonEditTodo}
+        type="button"
+        onClick={handleClickEdit}
+      >
+        <FaEdit />
+      </ButtonTodoEdit>
+
       <InputEditTodo
         style={{ display: 'none' }}
         ref={$inputEditTodo}
@@ -123,21 +140,6 @@ export default function TodoItem({
       >
         <FaEdit />
       </ButtonTodoEditCheck>
-      <ButtonTodoCheck
-        type="button"
-        onClick={handleClickCheck}
-        ref={$buttonCheckTodo}
-      >
-        <FaCheck />
-      </ButtonTodoCheck>
-
-      <ButtonTodoEdit
-        ref={$buttonEditTodo}
-        type="button"
-        onClick={handleClickEdit}
-      >
-        <FaEdit />
-      </ButtonTodoEdit>
     </TodoItemStyle>
   );
 }
