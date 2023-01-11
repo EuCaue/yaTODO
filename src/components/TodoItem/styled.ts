@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TodoItemStyle = styled.article`
+export const Container = styled.article`
   display: flex;
   justify-content: center;
   align-self: center;
@@ -16,7 +16,7 @@ export const TodoItemStyle = styled.article`
   word-wrap: break-word;
   hyphens: auto;
   break-inside: avoid;
-  font-size: 10px;
+  overflow: hidden;
   text-align: center;
   border-radius: 10px;
   position: relative;
@@ -29,10 +29,10 @@ export const TextTodo = styled.p`
   align-self: center;
   justify-content: center;
   align-items: center;
-  flex-wrap: row-reverse wrap;
+  flex-flow: row-reverse wrap;
   text-align: center;
-  max-width: 50vw;
-  width: 85%;
+  max-width: 90%;
+  width: 74%;
   min-height: 10vh;
   font-size: 16px;
 `;
@@ -81,13 +81,15 @@ export const ButtonTodoCheck = styled.button`
 export const ButtonTodoEditCheck = styled(ButtonTodoEdit)``;
 
 export const InputEditTodo = styled.input`
-  position: absolute;
   z-index: 10;
   display: flex;
   justify-content: center;
   align-self: center;
   align-items: center;
   text-align: center;
+  flex-flow: row-reverse wrap;
+  max-width: 90%;
+  min-height: 10vh;
   background-color: ${(props) => props.theme.secondary};
   color: ${(props) => props.theme.text};
 `;

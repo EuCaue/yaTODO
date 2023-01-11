@@ -81,7 +81,7 @@ export default function Todo(): JSX.Element {
         {/* TODO: make a double check function to delete all todos */}
         <DeleteButton type="button" onClick={() => handleClickDelete()}>
           <small>Delete all tasks</small>
-          <FaRegTrashAlt size={40} />
+          <FaRegTrashAlt size={34} />
         </DeleteButton>
 
         <InputTodo
@@ -93,7 +93,7 @@ export default function Todo(): JSX.Element {
           ref={inputTodo}
         />
         <SubmitBtn type="submit">
-          <FaPlus size={40} />
+          <FaPlus size={34} />
         </SubmitBtn>
       </Form>
       <TodoFlexWrapper reversedList={reversedList}>{todosMap}</TodoFlexWrapper>
@@ -101,7 +101,7 @@ export default function Todo(): JSX.Element {
         type="button"
         onClick={() => setReversedList(!reversedList)}
       >
-        <FaExchangeAlt size={40} />
+        <FaExchangeAlt size={34} />
       </ButtonExchange>
     </Container>
   );

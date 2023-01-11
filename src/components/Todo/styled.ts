@@ -56,7 +56,6 @@ export const InputTodo = styled.input`
   min-height: 8vh;
   height: fit-content;
   border-radius: 10px;
-  font-size: 20px;
   border: 1px solid ${(props) => props.theme.text};
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.secondary};
@@ -108,7 +107,6 @@ export const TodoFlexWrapper = styled.section<Props>`
   align-items: center;
   flex-flow: ${(props) => (props.reversedList ? 'row-reverse' : 'row')} ${(props) => (props.reversedList ? 'wrap-reverse' : 'wrap')};
   gap: 2vw;
-  /* position: relative; */
   align-self: unset;
   padding-top: 1vw;
 `;
