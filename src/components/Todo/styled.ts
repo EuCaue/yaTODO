@@ -1,26 +1,9 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 
 type Props = {
   reversedList: boolean;
 };
-
-export const Container = styled.section`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-flow: column wrap;
-  align-self: center;
-  margin-top: 2.5vw;
-  max-width: 80vw;
-  width: 55vw;
-  min-height: 80vh;
-  position: relative;
-  border-radius: 15px;
-  border: 5px solid ${(props) => props.theme.text};
-
-`;
 
 export const Form = styled.form`
   display: flex;
@@ -105,7 +88,8 @@ export const TodoFlexWrapper = styled.section<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-flow: ${(props) => (props.reversedList ? 'row-reverse' : 'row')} ${(props) => (props.reversedList ? 'wrap-reverse' : 'wrap')};
+  flex-direction: ${(props) => (props.reversedList ? 'row-reverse' : 'row')};
+  flex-wrap: ${(props) => (props.reversedList ? 'wrap-reverse' : 'wrap')};
   gap: 2vw;
   align-self: unset;
   padding-top: 1vw;
@@ -126,6 +110,52 @@ export const ButtonExchange = styled.button`
       path {
         fill: ${(props) => props.theme.accentColor};
       }
+    }
+  }
+`;
+
+export const Container = styled.section`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-flow: column wrap;
+  align-self: center;
+  margin-top: 2.5vw;
+  max-width: 80vw;
+  width: 55vw;
+  min-height: 80vh;
+  position: relative;
+  border-radius: 15px;
+  border: 5px solid ${(props) => props.theme.text};
+
+  @media screen and (min-width: 320px) and (max-width: 575px) {
+    max-width: none;
+    width: 90%;
+    font-size: 16px;
+    ${InputTodo} {
+      min-width: 10vw;
+      min-height: 5.5vh;
+    }
+
+    ${ButtonExchange} {
+      top: calc(-10% + -0.5vw);
+      right: 2em;
+    }
+  }
+
+  @media screen and (min-width: 36em) and (max-width: 65em) {
+    max-width: none;
+    width: 90%;
+    font-size: 16px;
+
+    ${InputTodo} {
+      min-width: 10vw;
+      min-height: 5.5vh;
+    }
+
+    ${ButtonExchange} {
+      top: -11%;
+      right: 2em;
     }
   }
 `;

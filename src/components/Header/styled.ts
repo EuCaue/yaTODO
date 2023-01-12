@@ -7,7 +7,7 @@ export const HeaderTodo = styled.header`
   align-items: center;
   text-align: center;
   z-index: 10;
-  position: sticky;
+  /* position: sticky; */
   flex-wrap: wrap;
   background-color: ${(props) => props.theme.secondary};
 `;
