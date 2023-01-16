@@ -4,6 +4,7 @@ interface Theme {
   primary: string;
   text: string;
   highlight: string;
+  accentColor: string;
 }
 
 export default createGlobalStyle<{ theme: Theme }>`
@@ -11,13 +12,14 @@ export default createGlobalStyle<{ theme: Theme }>`
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      // font-family: "Ubuntu", sans-serif;
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       font-weight: 400;
       font-size: 18px;
       outline: 0;
       border: none;
       transition: all 0.2s linear;
+    background-color: ${(props) => props.theme.primary};
+color: ${(props) => props.theme.text};
       ::selection {
 background-color: ${(props) => props.theme.highlight};
 }
@@ -29,7 +31,7 @@ html, body, #root {
 }
 
 body {
-  height: 100%;
+  // height: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   ::-webkit-scrollbar {
@@ -43,7 +45,15 @@ color: ${(props) => props.theme.text};
 
 a {
   text-decoration: none;
+color: ${(props) => props.theme.text};
 }
 
+svg {
+background-color: transparent;
+}
+
+svg:hover {
+fill: ${(props) => props.theme.accentColor};
+}
 
 `;

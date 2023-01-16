@@ -17,12 +17,6 @@ export const Form = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    fill: ${(props) => props.theme.text};
-    background-color: ${(props) => props.theme.primary};
-    transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
-    :hover {
-      fill: ${(props) => props.theme.accentColor};
-    }
   }
 `;
 
@@ -42,10 +36,10 @@ export const InputTodo = styled.input`
   border: 1px solid ${(props) => props.theme.text};
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.secondary};
+  :hover,
   :focus,
   :active {
-    transition: none;
-    border: 2px solid ${(props) => props.theme.accentColor};
+    border: 1px solid ${(props) => props.theme.accentColor};
   }
 `;
 
@@ -102,16 +96,7 @@ export const ButtonExchange = styled.button`
   cursor: pointer;
   top: 3vh;
   right: -3.5vw;
-  transition: all 0.1s linear;
   rotate: 90deg;
-  color: ${(props) => props.theme.text};
-  :hover {
-    svg {
-      path {
-        fill: ${(props) => props.theme.accentColor};
-      }
-    }
-  }
 `;
 
 export const Container = styled.section`
@@ -128,24 +113,11 @@ export const Container = styled.section`
   border-radius: 15px;
   border: 5px solid ${(props) => props.theme.text};
 
-  @media screen and (min-width: 320px) and (max-width: 575px) {
-    max-width: none;
-    width: 90%;
-    font-size: 16px;
-    ${InputTodo} {
-      min-width: 10vw;
-      min-height: 5.5vh;
-    }
-
-    ${ButtonExchange} {
-      top: calc(-10% + -0.5vw);
-      right: 2em;
-    }
-  }
-
+  /* 576px ~ 1100px*/
   @media screen and (min-width: 36em) and (max-width: 65em) {
     max-width: none;
     width: 90%;
+    min-height: 50em;
     font-size: 16px;
 
     ${InputTodo} {
@@ -153,8 +125,47 @@ export const Container = styled.section`
       min-height: 5.5vh;
     }
 
+    ${TodoFlexWrapper} {
+      padding-top: 3vw;
+    }
+
+    ${Form} {
+      padding-top: 2.5vw;
+    }
+
     ${ButtonExchange} {
-      top: -11%;
+      top: 3vh;
+      right: 0.5vw;
+    }
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 575px) {
+    max-width: none;
+    width: 90%;
+    font-size: 16px;
+    min-height: 45em;
+    padding-bottom: 1rem;
+
+    ${DeleteButton} {
+      padding: 0.5vw;
+    }
+    ${SubmitBtn} {
+      padding: 0.5vw;
+    }
+    ${InputTodo} {
+      min-width: 75%;
+      min-height: calc(3.5rem - 4vw);
+    }
+    ${TodoFlexWrapper} {
+      padding-top: 5vw;
+    }
+
+    ${Form} {
+      width: 90%;
+      padding-top: 3vw;
+    }
+    ${ButtonExchange} {
+      top: calc(-9% + -0.6vmin + 0.1rem);
       right: 2em;
     }
   }

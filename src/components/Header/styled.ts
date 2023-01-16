@@ -7,7 +7,6 @@ export const HeaderTodo = styled.header`
   align-items: center;
   text-align: center;
   z-index: 10;
-  /* position: sticky; */
   flex-wrap: wrap;
   background-color: ${(props) => props.theme.secondary};
 `;
@@ -16,19 +15,24 @@ export const Nav = styled.nav`
   display: flex;
   width: 100vw;
   justify-content: space-between;
+
   align-items: center;
   flex-wrap: wrap;
   background-color: ${(props) => props.theme.secondary};
   a {
-    color: ${(props) => props.theme.text};
     display: flex;
     align-self: center;
     justify-content: center;
-    padding-right: 1vw;
-
+    width: min-content;
+    margin-right: 1vw;
+    background-color: transparent;
     :hover {
       color: ${(props) => props.theme.accentColor};
     }
+  }
+
+  label {
+    background-color: ${(props) => props.theme.secondary};
   }
 
   select {

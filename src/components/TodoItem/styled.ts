@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const TextTodo = styled.p`
+  background-color: ${(props) => props.theme.secondary};
   display: flex;
   align-self: center;
   justify-content: center;
@@ -23,15 +24,6 @@ export const ButtonTodoEdit = styled.button`
   position: absolute;
   padding-right: 0.2vw;
   right: 0vw;
-  transition: all 0.1s linear;
-  color: ${(props) => props.theme.text};
-  :hover {
-    svg {
-      path {
-        fill: ${(props) => props.theme.accentColor};
-      }
-    }
-  }
 `;
 
 export const ButtonTodoCheck = styled.button`
@@ -43,15 +35,6 @@ export const ButtonTodoCheck = styled.button`
   cursor: pointer;
   position: absolute;
   right: 2vw;
-  transition: all 0.1s linear;
-  color: ${(props) => props.theme.text};
-  :hover {
-    svg {
-      path {
-        fill: ${(props) => props.theme.accentColor};
-      }
-    }
-  }
 `;
 
 export const ButtonTodoEditCheck = styled(ButtonTodoEdit)``;
@@ -79,8 +62,6 @@ export const Container = styled.article`
   min-height: 10vh;
   height: fit-content;
   min-width: 25vw;
-  /* max-width: 100%; */
-  /* width: fit-content; */
   word-break: break-all;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -90,16 +71,39 @@ export const Container = styled.article`
   text-align: center;
   border-radius: 10px;
   position: relative;
-  color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.secondary};
-  @media screen and (min-width: 320px) and (max-width: 575px) {
-    min-width: 80vw;
+
+  @media screen and (min-width: 36em) and (max-width: 65em) {
+    max-width: 95%;
+    min-width: 50vw;
+    width: fit-content;
+    ${TextTodo} {
+      max-width: 90%;
+      width: 68%;
+    }
+
     ${ButtonTodoEdit} {
-      bottom: 2vh;
       right: 2vw;
     }
     ${ButtonTodoCheck} {
-      bottom: 5vh;
+      right: 6vw;
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 575px) {
+    min-width: 75vw;
+    min-height: 4.5rem;
+    max-width: 85%;
+    ${TextTodo} {
+      padding: 1vw 0 1vw 0;
+      min-height: 1rem;
+    }
+    ${ButtonTodoEdit} {
+      bottom: 25%;
+      right: 2vw;
+    }
+    ${ButtonTodoCheck} {
+      bottom: 60%;
       right: 2vw;
     }
 
@@ -112,16 +116,6 @@ export const Container = styled.article`
       right: -0.5vw;
       top: 2vh;
       padding-right: 0.5vw;
-    }
-  }
-
-  @media screen and (min-width: 36em) and (max-width: 65em) {
-    min-width: 80vw;
-    ${ButtonTodoEdit} {
-      right: 2vw;
-    }
-    ${ButtonTodoCheck} {
-      right: 6vw;
     }
   }
 `;
