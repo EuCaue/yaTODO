@@ -76,7 +76,7 @@ export const Container = styled.article`
   @media screen and (min-width: 36em) and (max-width: 65em) {
     max-width: 95%;
     min-width: 50vw;
-    width: fit-content;
+    width: 90%;
     ${TextTodo} {
       max-width: 90%;
       width: 68%;

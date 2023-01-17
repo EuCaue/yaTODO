@@ -121,7 +121,7 @@ export const Container = styled.section`
     font-size: 16px;
 
     ${InputTodo} {
-      min-width: 10vw;
+      min-width: 75%;
       min-height: 5.5vh;
     }
 
@@ -130,6 +130,7 @@ export const Container = styled.section`
     }
 
     ${Form} {
+      width: 90%;
       padding-top: 2.5vw;
     }
 
