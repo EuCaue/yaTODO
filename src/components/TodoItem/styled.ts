@@ -10,7 +10,7 @@ export const TextTodo = styled.p`
   flex-flow: row-reverse wrap;
   text-align: center;
   max-width: 90%;
-  width: 74%;
+  width: 70%;
   min-height: 10vh;
   font-size: 16px;
 `;
@@ -49,7 +49,8 @@ export const InputEditTodo = styled.input`
   text-align: center;
   flex-flow: row-reverse wrap;
   max-width: 90%;
-  min-height: 10vh;
+  min-height: 8vh;
+  max-height: 10vh;
   background-color: ${(props) => props.theme.secondary};
   color: ${(props) => props.theme.text};
 `;

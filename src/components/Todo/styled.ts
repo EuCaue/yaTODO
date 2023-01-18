@@ -12,7 +12,7 @@ export const Form = styled.form`
   align-items: center;
   align-self: center;
   margin-top: 1vw;
-
+  width: 90%;
   svg {
     display: flex;
     justify-content: center;
@@ -29,9 +29,9 @@ export const InputTodo = styled.input`
   text-align: center;
   font-weight: 500;
   min-width: 25vw;
-  width: fit-content;
-  min-height: 8vh;
-  height: fit-content;
+  width: 76%;
+  min-height: 6vh;
+  max-height: 7vh;
   border-radius: 10px;
   border: 1px solid ${(props) => props.theme.text};
   color: ${(props) => props.theme.text};
@@ -72,7 +72,7 @@ export const DeleteButton = styled.button`
       font-family: serif;
       border-radius: 1px;
       padding: 0.5em;
-      border: 0.5px double ${(props) => props.theme.text};
+      border: 0.5px solid ${(props) => props.theme.text};
       color: ${(props) => props.theme.text};
     }
   }
@@ -87,6 +87,12 @@ export const TodoFlexWrapper = styled.section<Props>`
   gap: 2vw;
   align-self: unset;
   padding-top: 1vw;
+
+  article:nth-last-child-(3n+0) {
+  /* min-width: 70vw; */
+  width: 80vw;
+  max-width: 60vw;
+  }
 `;
 
 export const ButtonExchange = styled.button`
@@ -107,10 +113,11 @@ export const Container = styled.section`
   align-self: center;
   margin-top: 2.5vw;
   max-width: 80vw;
-  width: 55vw;
-  min-height: 80vh;
+  width: 57vw;
+  min-height: 85vh;
   position: relative;
   border-radius: 15px;
+  padding-bottom: 1rem;
   border: 5px solid ${(props) => props.theme.text};
 
   /* 576px ~ 1100px*/

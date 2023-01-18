@@ -7,4 +7,5 @@ export const Main = styled.main`
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+  padding-bottom: 1rem;
 `;
