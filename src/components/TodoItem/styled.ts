@@ -4,6 +4,7 @@ export const TextTodo = styled.p`
   background-color: ${(props) => props.theme.secondary};
   display: flex;
   align-self: center;
+  padding: 1vw 0 1vw 0;
   justify-content: center;
   align-items: center;
   flex-flow: row-reverse wrap;
@@ -62,6 +63,8 @@ export const Container = styled.article`
   min-height: 10vh;
   height: fit-content;
   min-width: 25vw;
+  width: 25vw;
+  max-width: 25vw;
   word-break: break-all;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -73,20 +76,22 @@ export const Container = styled.article`
   position: relative;
   background-color: ${(props) => props.theme.secondary};
 
-  @media screen and (min-width: 36em) and (max-width: 65em) {
-    max-width: 95%;
-    min-width: 50vw;
-    width: 90%;
+  @media screen and (min-width: 36em) and (max-width: 70em) {
+    max-width: 50%;
+    min-width: 40%;
+    width: 40%;
     ${TextTodo} {
       max-width: 90%;
-      width: 68%;
+      width: 63%;
+      padding: 1vw 0 1vw 0;
+      min-height: 1rem;
     }
 
     ${ButtonTodoEdit} {
-      right: 2vw;
+      right: 1vw;
     }
     ${ButtonTodoCheck} {
-      right: 6vw;
+      right: 4vw;
     }
   }
 
@@ -108,14 +113,14 @@ export const Container = styled.article`
     }
 
     ${InputEditTodo} {
-      max-width: none;
+      max-width: unset;
+      max-height: unset;
       font-size: initial;
     }
 
     ${ButtonTodoEditCheck} {
-      right: -0.5vw;
+      right: 2vw;
       top: 2vh;
-      padding-right: 0.5vw;
     }
   }
 `;

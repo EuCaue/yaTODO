@@ -116,7 +116,7 @@ export const Container = styled.section`
   /* 576px ~ 1100px*/
   @media screen and (min-width: 36em) and (max-width: 65em) {
     max-width: none;
-    width: 90%;
+    width: 92%;
     min-height: 50em;
     font-size: 16px;
 
@@ -135,7 +135,7 @@ export const Container = styled.section`
     }
 
     ${ButtonExchange} {
-      top: 3vh;
+      top: calc(4vw + 0.1rem);
       right: 0.5vw;
     }
   }
@@ -144,7 +144,7 @@ export const Container = styled.section`
     max-width: none;
     width: 90%;
     font-size: 16px;
-    min-height: 45em;
+    min-height: 170vw;
     padding-bottom: 1rem;
 
     ${DeleteButton} {
