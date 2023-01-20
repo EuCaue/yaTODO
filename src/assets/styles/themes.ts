@@ -30,7 +30,7 @@ export const rosePineDarkTheme: Colors = {
   secondary: `${colors.surfaceDark}`,
   text: `${colors.textDark}`,
   accentColor: `${colors.pineDark}`,
-  highlight: `${colors.highlightLowDark}`,
+  highlight: `${colors.loveDark}`,
 };
 
 export const rosePineLightTheme: Colors = {
@@ -38,5 +38,5 @@ export const rosePineLightTheme: Colors = {
   secondary: `${colors.surfaceLight}`,
   text: `${colors.textLight}`,
   accentColor: `${colors.pineLight}`,
-  highlight: `${colors.highlightLowLight}`,
+  highlight: `${colors.loveLight}`,
 };

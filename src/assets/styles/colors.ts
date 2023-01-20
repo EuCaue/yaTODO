@@ -19,11 +19,11 @@ export const baseDark = '#191724';
 export const surfaceDark = '#1f1d2e';
 export const textDark = '#e0def4';
 export const pineDark = '#31748f';
-export const highlightLowDark = '#26233a';
+export const loveDark = '#eb6f92';
 
 // NOTE: light colors
 export const baseLight = '#faf4ed';
 export const surfaceLight = '#fffaf3';
 export const textLight = '#575279';
 export const pineLight = '#286983';
-export const highlightLowLight = '#f4ede8';
+export const loveLight = '#b4637a';

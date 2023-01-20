@@ -32,7 +32,7 @@ export const InputTodo = styled.input`
   width: 76%;
   min-height: 6vh;
   max-height: 7vh;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid ${(props) => props.theme.text};
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.secondary};
@@ -87,12 +87,6 @@ export const TodoFlexWrapper = styled.section<Props>`
   gap: 2vw;
   align-self: unset;
   padding-top: 1vw;
-
-  article:nth-last-child-(3n+0) {
-  /* min-width: 70vw; */
-  width: 80vw;
-  max-width: 60vw;
-  }
 `;
 
 export const ButtonExchange = styled.button`
@@ -103,6 +97,62 @@ export const ButtonExchange = styled.button`
   top: 3vh;
   right: -3.5vw;
   rotate: 90deg;
+`;
+
+export const PopUpContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: column wrap;
+  top: 25%;
+  position: absolute;
+  min-width: 20vw;
+  border-radius: 7px;
+  min-height: 15vh;
+  padding: 1vw;
+  z-index: 100;
+  box-shadow: 1px 1px 1px 100vw rgba(0,0,0,0.9);
+  border: 1px solid ${(props) => props.theme.text};
+`
+
+export const TextPopUp = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: row wrap;
+`;
+
+export const SpanPopUp = styled.span`
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  align-self: center;
+  flex-flow: row wrap;
+`;
+
+export const ButtonDeleteConfirm = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: row wrap;
+  :hover{
+    color: ${(props) => props.theme.accentColor};
+  }
+`;
+
+export const ButtonDeleteCancel = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: row wrap;
+  :hover{
+    color: ${(props) => props.theme.highlight};
+  }
 `;
 
 export const Container = styled.section`
@@ -173,7 +223,7 @@ export const Container = styled.section`
       padding-top: 3vw;
     }
     ${ButtonExchange} {
-      top: calc(-9% + -0.6vmin + 0.1rem);
+      top: -3.5rem;
       right: 2em;
     }
   }

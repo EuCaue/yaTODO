@@ -42,8 +42,7 @@ export default function TodoItem({
     setTodos(todosLocal);
   };
 
-  const handleClickEditCheck = (): void | boolean => {
-    // TODO: verify it's a new value is empty or not
+  const handleClickEditCheck = (): boolean => {
     if (newTodoText === '') {
       if (
         $buttonEditTodo.current !== null &&
@@ -99,9 +98,10 @@ export default function TodoItem({
     }
   };
 
-  const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (event.keyCode === 13) handleClickEditCheck();
-  };
+  function handleEnter(event: React.KeyboardEvent<HTMLInputElement>): void {
+    if (event.code === 'Enter' || event.code === 'NumpadEnter')
+      handleClickEditCheck();
+  }
 
   return (
     <Container>
@@ -128,7 +128,7 @@ export default function TodoItem({
         defaultValue={text}
         type="text"
         onChange={(e) => setNewTodoText(e.target.value)}
-        onKeyUp={(e) => handleEnter(e)}
+        onKeyDown={(e) => handleEnter(e)}
         required
       />
       <ButtonTodoEditCheck

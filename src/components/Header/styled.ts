@@ -44,7 +44,7 @@ export const Nav = styled.nav`
     align-content: center;
     align-self: center;
 
-    height: 5vh;
+    height: 2rem;
     padding-left: 1vw;
     text-align: center;
     outline: 0;

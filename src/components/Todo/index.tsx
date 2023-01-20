@@ -15,6 +15,11 @@ import {
   SubmitBtn,
   TodoFlexWrapper,
   ButtonExchange,
+  PopUpContainer,
+  TextPopUp,
+  ButtonDeleteCancel,
+  ButtonDeleteConfirm,
+  SpanPopUp,
 } from './styled';
 import TodoItem from '../TodoItem';
 
@@ -28,6 +33,8 @@ export default function Todo(): JSX.Element {
   const [newTodoText, setNewTodoText] = useState<string>('');
   const [indexState, setIndexState] = useState<number>(0);
   const [reversedList, setReversedList] = useState<boolean>(false);
+  const [showPopUp, setShowPopUp] = useState<boolean>(false);
+
 
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
@@ -38,20 +45,20 @@ export default function Todo(): JSX.Element {
     }
   }
 
-  function handleClickDelete(): void {
+  function handleClickDeleteConfirm(): void {
     todosLocal.splice(0, todosLocal.length);
     setTodos(todosLocal);
+    setShowPopUp(!showPopUp)
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setTodo(event.target.value);
   }
 
-  const handleKeypress = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ): void => {
-    if (event.code === '13') handleSubmit();
-  };
+  function handleKeypress(event: React.KeyboardEvent<HTMLInputElement>): void {
+    if (event.code === '13')
+      handleSubmit();
+  }
 
   useEffect(() => {
     localStorage.setItem('todosLocal', JSON.stringify(todos));
@@ -78,11 +85,21 @@ export default function Todo(): JSX.Element {
   return (
     <Container>
       <Form onSubmit={(e) => handleSubmit(e)} id="formTodo">
-        {/* TODO: make a double check function to delete all todos */}
-        <DeleteButton type="button" onClick={() => handleClickDelete()}>
+        <DeleteButton type="button" onClick={() => setShowPopUp(!showPopUp)}>
           <small>Delete all tasks</small>
           <FaRegTrashAlt size={34} />
         </DeleteButton>
+
+        <PopUpContainer style={{ display: showPopUp ? "flex" : "none" }}>
+          <TextPopUp>
+            Do you want to delete all todos?
+          </TextPopUp>
+          <SpanPopUp>
+            <ButtonDeleteConfirm type="button" onClick={() => handleClickDeleteConfirm()}>OK </ButtonDeleteConfirm>
+            <ButtonDeleteCancel type="button" onClick={() => setShowPopUp(!showPopUp)}>Cancel</ButtonDeleteCancel>
+          </SpanPopUp>
+
+        </PopUpContainer>
 
         <InputTodo
           placeholder='"Pet the cat"'
@@ -103,6 +120,6 @@ export default function Todo(): JSX.Element {
       >
         <FaExchangeAlt size={34} />
       </ButtonExchange>
-    </Container>
+    </Container >
   );
 }
