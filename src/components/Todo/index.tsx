@@ -86,7 +86,6 @@ export default function Todo(): JSX.Element {
     <Container>
       <Form onSubmit={(e) => handleSubmit(e)} id="formTodo">
         <DeleteButton type="button" onClick={() => setShowPopUp(!showPopUp)}>
-          <small>Delete all tasks</small>
           <FaRegTrashAlt size={34} />
         </DeleteButton>
 

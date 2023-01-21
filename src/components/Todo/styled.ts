@@ -58,24 +58,6 @@ export const DeleteButton = styled.button`
   align-items: center;
   cursor: pointer;
   background-color: transparent;
-  small {
-    display: none;
-    position: absolute;
-    z-index: 10;
-  }
-
-  :hover {
-    small {
-      display: inline;
-      top: 3.5rem;
-      font-size: 12px;
-      font-family: serif;
-      border-radius: 1px;
-      padding: 0.5em;
-      border: 0.5px solid ${(props) => props.theme.text};
-      color: ${(props) => props.theme.text};
-    }
-  }
 `;
 
 export const TodoFlexWrapper = styled.section<Props>`
