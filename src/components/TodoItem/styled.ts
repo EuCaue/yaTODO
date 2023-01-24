@@ -78,9 +78,9 @@ export const Container = styled.article`
   background-color: ${(props) => props.theme.secondary};
 
   @media screen and (min-width: 36em) and (max-width: 70em) {
-    max-width: 50%;
-    min-width: 40%;
-    width: 40%;
+    max-width: 90%;
+    min-width: 48%;
+    width: 48%;
     ${TextTodo} {
       max-width: 90%;
       width: 63%;

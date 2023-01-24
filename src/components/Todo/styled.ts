@@ -165,6 +165,7 @@ export const Container = styled.section`
     }
 
     ${TodoFlexWrapper} {
+      width: 75vw;
       padding-top: 3vw;
     }
 

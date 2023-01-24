@@ -30,7 +30,6 @@ export default function Todo(): JSX.Element {
   const [, updateState] = React.useState<unknown>();
   const forceUpdate = useCallback(() => updateState({}), []);
   const inputTodo = useRef<HTMLInputElement>(null);
-  const [newTodoText, setNewTodoText] = useState<string>('');
   const [indexState, setIndexState] = useState<number>(0);
   const [reversedList, setReversedList] = useState<boolean>(false);
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
@@ -39,25 +38,13 @@ export default function Todo(): JSX.Element {
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
     setTodos([...todos, todo]);
-    if (inputTodo.current !== null) {
-      inputTodo.current.value = '';
-      inputTodo.current.focus();
-    }
+    inputTodo.current!.value = '';
+    inputTodo.current?.focus();
   }
-
   function handleClickDeleteConfirm(): void {
     todosLocal.splice(0, todosLocal.length);
     setTodos(todosLocal);
     setShowPopUp(!showPopUp)
-  }
-
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setTodo(event.target.value);
-  }
-
-  function handleKeypress(event: React.KeyboardEvent<HTMLInputElement>): void {
-    if (event.code === '13')
-      handleSubmit();
   }
 
   useEffect(() => {
@@ -73,8 +60,6 @@ export default function Todo(): JSX.Element {
           text={todoText}
           index={index}
           setTodos={setTodos}
-          setNewTodoText={setNewTodoText}
-          newTodoText={newTodoText}
           setIndexState={setIndexState}
           indexState={indexState}
         />
@@ -104,8 +89,11 @@ export default function Todo(): JSX.Element {
           placeholder='"Pet the cat"'
           required
           form="formTodo"
-          onKeyDown={(e) => handleKeypress(e)}
-          onChange={(e) => handleChange(e)}
+          onKeyDown={(e) => {
+            if (e.code === '13')
+              handleSubmit();
+          }}
+          onChange={(e) => setTodo(e.target.value)}
           ref={inputTodo}
         />
         <SubmitBtn type="submit">
