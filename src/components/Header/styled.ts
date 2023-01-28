@@ -33,6 +33,7 @@ export const Nav = styled.nav`
 
   label {
     background-color: ${(props) => props.theme.secondary};
+    cursor: text;
   }
 
   select {

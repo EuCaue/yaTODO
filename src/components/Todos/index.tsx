@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaCheck, FaEdit } from 'react-icons/fa';
 import {
   Container,
@@ -11,14 +11,14 @@ import {
 
 export interface ITodo {
   index: number;
-  text: string;
+  todo: string;
   setTodos: (todosArray: string[]) => void;
-  setIndexState: (currentIndex: number) => void;
   indexState: number;
+  setIndexState: (currentIndex: number) => void;
 }
-export default function TodoItem({
+export default function Todos({
   index,
-  text,
+  todo,
   setTodos,
   indexState,
   setIndexState,
@@ -31,18 +31,16 @@ export default function TodoItem({
   const [newTodoText, setNewTodoText] = useState<string>('');
   const todosLocal: string[] = JSON.parse(
     localStorage.getItem('todosLocal') || '[]',
-  );
-  const [, updateState] = React.useState<unknown>();
-  const forceUpdate = useCallback(() => updateState({}), []);
+  )
 
   const handleClickCheck = (): void => {
-    todosLocal.splice(index, 1);
+    todosLocal.splice(index, 1)[0];
     localStorage.setItem('todosLocal', JSON.stringify(todosLocal));
     setTodos(todosLocal);
   };
 
   const handleClickEditCheck = (): boolean => {
-    if (newTodoText === '') {
+    if (newTodoText === '' || newTodoText === ' ') {
       $buttonEditTodoCheck.current!.style.display = 'none';
       $inputEditTodo.current!.style.display = 'none';
       $buttonEditTodo.current!.style.display = 'flex';
@@ -50,6 +48,7 @@ export default function TodoItem({
       $buttonCheckTodo.current!.style.display = 'flex';
       return false;
     }
+
     todosLocal.splice(indexState, 1, newTodoText);
     localStorage.setItem('todosLocal', JSON.stringify(todosLocal));
     setTodos(todosLocal);
@@ -75,7 +74,7 @@ export default function TodoItem({
 
   return (
     <Container>
-      <TextTodo ref={$currentTextTodo}>{text}</TextTodo>
+      <TextTodo ref={$currentTextTodo}>{todo}</TextTodo>
       <ButtonTodoCheck
         type="button"
         onClick={handleClickCheck}
@@ -83,7 +82,6 @@ export default function TodoItem({
       >
         <FaCheck />
       </ButtonTodoCheck>
-
       <ButtonTodoEdit
         ref={$buttonEditTodo}
         type="button"

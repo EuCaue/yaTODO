@@ -21,7 +21,7 @@ import {
   ButtonDeleteConfirm,
   SpanPopUp,
 } from './styled';
-import TodoItem from '../TodoItem';
+import Todos from '../Todos';
 
 export default function Todo(): JSX.Element {
   const todosLocal = JSON.parse(localStorage.getItem('todosLocal') || '[]');
@@ -33,7 +33,6 @@ export default function Todo(): JSX.Element {
   const [indexState, setIndexState] = useState<number>(0);
   const [reversedList, setReversedList] = useState<boolean>(false);
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
-
 
   function handleSubmit(event?: FormEvent): void {
     event?.preventDefault();
@@ -56,8 +55,8 @@ export default function Todo(): JSX.Element {
     (todoText: string, index: number): JSX.Element => {
       return (
         // eslint-disable-next-line react/jsx-key
-        <TodoItem
-          text={todoText}
+        <Todos
+          todo={todoText}
           index={index}
           setTodos={setTodos}
           setIndexState={setIndexState}
@@ -69,22 +68,10 @@ export default function Todo(): JSX.Element {
 
   return (
     <Container>
-      <Form onSubmit={(e) => handleSubmit(e)} id="formTodo">
+      <Form onSubmit={(e) => handleSubmit(e)} id="formTodo" >
         <DeleteButton type="button" onClick={() => setShowPopUp(!showPopUp)}>
           <FaRegTrashAlt size={34} />
         </DeleteButton>
-
-        <PopUpContainer style={{ display: showPopUp ? "flex" : "none" }}>
-          <TextPopUp>
-            Do you want to delete all todos?
-          </TextPopUp>
-          <SpanPopUp>
-            <ButtonDeleteConfirm type="button" onClick={() => handleClickDeleteConfirm()}>OK </ButtonDeleteConfirm>
-            <ButtonDeleteCancel type="button" onClick={() => setShowPopUp(!showPopUp)}>Cancel</ButtonDeleteCancel>
-          </SpanPopUp>
-
-        </PopUpContainer>
-
         <InputTodo
           placeholder='"Pet the cat"'
           required
@@ -100,13 +87,26 @@ export default function Todo(): JSX.Element {
           <FaPlus size={34} />
         </SubmitBtn>
       </Form>
+
+      <PopUpContainer style={{ display: showPopUp ? "flex" : "none" }}>
+        <TextPopUp>
+          Do you want to delete all todos?
+        </TextPopUp>
+        <SpanPopUp>
+          <ButtonDeleteConfirm type="button" onClick={() => handleClickDeleteConfirm()}>OK </ButtonDeleteConfirm>
+          <ButtonDeleteCancel type="button" onClick={() => setShowPopUp(!showPopUp)}>Cancel</ButtonDeleteCancel>
+        </SpanPopUp>
+      </PopUpContainer>
+
       <TodoFlexWrapper reversedList={reversedList}>{todosMap}</TodoFlexWrapper>
+
       <ButtonExchange
         type="button"
         onClick={() => setReversedList(!reversedList)}
       >
         <FaExchangeAlt size={34} />
       </ButtonExchange>
+
     </Container >
   );
 }
