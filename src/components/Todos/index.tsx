@@ -12,9 +12,10 @@ import {
 export interface ITodo {
   index: number;
   todo: string;
-  setTodos: (todosArray: string[]) => void;
   indexState: number;
+  setTodos: (todosArray: string[]) => void;
   setIndexState: (currentIndex: number) => void;
+
 }
 export default function Todos({
   index,
@@ -34,7 +35,7 @@ export default function Todos({
   )
 
   const handleClickCheck = (): void => {
-    todosLocal.splice(index, 1)[0];
+    todosLocal.splice(index, 1);
     localStorage.setItem('todosLocal', JSON.stringify(todosLocal));
     setTodos(todosLocal);
   };
@@ -62,14 +63,13 @@ export default function Todos({
 
   const handleClickEdit = (): void => {
     setIndexState(index);
-    setNewTodoText('');
     $buttonEditTodoCheck.current!.style.display = 'flex';
+    $inputEditTodo.current!.defaultValue = todo;
     $inputEditTodo.current!.style.display = 'flex';
     $inputEditTodo.current?.focus();
     $buttonEditTodo.current!.style.display = 'none';
     $currentTextTodo.current!.style.display = 'none';
     $buttonCheckTodo.current!.style.display = 'none';
-
   };
 
   return (
@@ -93,7 +93,6 @@ export default function Todos({
       <InputEditTodo
         style={{ display: 'none' }}
         ref={$inputEditTodo}
-        defaultValue={$currentTextTodo.current?.innerText}
         type="text"
         onChange={(e) => setNewTodoText(e.target.value)}
         onKeyDown={(e) => {

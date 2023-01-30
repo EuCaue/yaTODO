@@ -14,7 +14,7 @@ import {
   InputTodo,
   SubmitBtn,
   TodoFlexWrapper,
-  ButtonExchange,
+  ButtonReverse,
   PopUpContainer,
   TextPopUp,
   ButtonDeleteCancel,
@@ -87,7 +87,6 @@ export default function Todo(): JSX.Element {
           <FaPlus size={34} />
         </SubmitBtn>
       </Form>
-
       <PopUpContainer style={{ display: showPopUp ? "flex" : "none" }}>
         <TextPopUp>
           Do you want to delete all todos?
@@ -97,15 +96,14 @@ export default function Todo(): JSX.Element {
           <ButtonDeleteCancel type="button" onClick={() => setShowPopUp(!showPopUp)}>Cancel</ButtonDeleteCancel>
         </SpanPopUp>
       </PopUpContainer>
-
       <TodoFlexWrapper reversedList={reversedList}>{todosMap}</TodoFlexWrapper>
-
-      <ButtonExchange
+      <ButtonReverse
         type="button"
         onClick={() => setReversedList(!reversedList)}
+        reversedList={reversedList}
       >
         <FaExchangeAlt size={34} />
-      </ButtonExchange>
+      </ButtonReverse>
 
     </Container >
   );

@@ -71,7 +71,7 @@ export const TodoFlexWrapper = styled.section<Props>`
   padding-top: 1vw;
 `;
 
-export const ButtonExchange = styled.button`
+export const ButtonReverse = styled.button<Props>`
   display: flex;
   background: transparent;
   position: absolute;
@@ -79,6 +79,12 @@ export const ButtonExchange = styled.button`
   top: 3vh;
   right: -3.5vw;
   rotate: 90deg;
+svg {
+    fill: ${(props) => props.reversedList ? props.theme.highlight : props.theme.text};
+  :hover {
+    fill: ${(props) => props.theme.accentColor};
+  }
+}
 `;
 
 export const PopUpContainer = styled.div`
@@ -174,7 +180,7 @@ export const Container = styled.section`
       padding-top: 2.5vw;
     }
 
-    ${ButtonExchange} {
+    ${ButtonReverse} {
       top: calc(4vw + 0.1rem);
       right: 0.5vw;
     }
@@ -205,7 +211,7 @@ export const Container = styled.section`
       width: 90%;
       padding-top: 3vw;
     }
-    ${ButtonExchange} {
+    ${ButtonReverse} {
       top: -3.5rem;
       right: 2em;
     }
