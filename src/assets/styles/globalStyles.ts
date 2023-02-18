@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 interface Theme {
   primary: string;
+  secondary: string;
   text: string;
   highlight: string;
   accentColor: string;
@@ -55,6 +56,35 @@ svg {
 
 svg:hover {
   fill: ${(props) => props.theme.accentColor};
+
 }
+
+.Toastify__toast {
+color: ${(props) => props.theme.text};
+background-color: ${(props) => props.theme.primary};
+    text-align: center;
+
+}
+
+.Toastify__toast-icon {
+svg {
+fill: ${(props) => props.theme.text};
+:hover {
+  fill: ${(props) => props.theme.accentColor};
+
+}
+}
+}
+
+
+.Toastify__close-button {
+color: ${(props) => props.theme.text};
+}
+
+.Toastify__close-button:hover,
+.Toastify__close-button:focus {
+    color: ${(props) => props.theme.accentColor};
+}
+
 
 `;

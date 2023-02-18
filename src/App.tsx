@@ -1,7 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import GlobalStyles from './assets/styles/globalStyles';
-import YaTodo from './pages/yaTodo';
+
 import {
   defaultDark,
   defaultLight,
@@ -11,15 +15,18 @@ import {
 } from './assets/styles/themes';
 import { GlobalContext } from './utils/GlobalContext';
 
-interface ThemesA {
+import router from './routes';
+import Header from './components/Header';
+
+interface Themes {
   defaultDark: Colors;
   defaultLight: Colors;
   rosePineDarkTheme: Colors;
   rosePineLightTheme: Colors;
+  [key: string]: Colors;
 }
 
-// HACK: use any because any other type not work, fix this in the futere.
-const themesMap: any = {
+const themesMap: Themes = {
   defaultDark,
   defaultLight,
   rosePineDarkTheme,
@@ -38,8 +45,15 @@ export default function App(): JSX.Element {
   return (
     <GlobalContext.Provider value={themesMemo}>
       <ThemeProvider theme={theme}>
+        <Header />
+        <RouterProvider router={router} />
         <GlobalStyles />
-        <YaTodo />
+        <ToastContainer
+          position="top-center"
+          autoClose={1200}
+          newestOnTop
+          hideProgressBar
+        />
       </ThemeProvider>
     </GlobalContext.Provider>
   );

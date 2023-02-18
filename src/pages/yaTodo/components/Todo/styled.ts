@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
+import { breakPoints } from '../../../../assets/styles/breakpoints';
 
 type Props = {
   reversedList: boolean;
@@ -79,12 +80,13 @@ export const ButtonReverse = styled.button<Props>`
   top: 3vh;
   right: -3.5vw;
   rotate: 90deg;
-svg {
-    fill: ${(props) => props.reversedList ? props.theme.highlight : props.theme.text};
-  :hover {
-    fill: ${(props) => props.theme.accentColor};
+  svg {
+    fill: ${(props) =>
+      props.reversedList ? props.theme.highlight : props.theme.text};
+    :hover {
+      fill: ${(props) => props.theme.accentColor};
+    }
   }
-}
 `;
 
 export const PopUpContainer = styled.div`
@@ -100,9 +102,10 @@ export const PopUpContainer = styled.div`
   min-height: 15vh;
   padding: 1vw;
   z-index: 100;
-  box-shadow: 1px 1px 1px 100vw rgba(0,0,0,0.9);
+  box-shadow: 1px 1px 1px 100vw rgba(0, 0, 0, 0.5);
+  background-blend-mode: color;
   border: 1px solid ${(props) => props.theme.text};
-`
+`;
 
 export const TextPopUp = styled.p`
   display: flex;
@@ -113,7 +116,7 @@ export const TextPopUp = styled.p`
 `;
 
 export const SpanPopUp = styled.span`
-   display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 1vw;
@@ -127,7 +130,7 @@ export const ButtonDeleteConfirm = styled.button`
   justify-content: center;
   align-self: center;
   flex-flow: row wrap;
-  :hover{
+  :hover {
     color: ${(props) => props.theme.accentColor};
   }
 `;
@@ -138,7 +141,7 @@ export const ButtonDeleteCancel = styled.button`
   justify-content: center;
   align-self: center;
   flex-flow: row wrap;
-  :hover{
+  :hover {
     color: ${(props) => props.theme.highlight};
   }
 `;
@@ -152,14 +155,14 @@ export const Container = styled.section`
   margin-top: 2.5vw;
   max-width: 80vw;
   width: 57vw;
-  min-height: 85vh;
+  min-height: 88vh;
   position: relative;
   border-radius: 15px;
   padding-bottom: 1rem;
   border: 5px solid ${(props) => props.theme.text};
 
   /* 576px ~ 1100px*/
-  @media screen and (min-width: 36em) and (max-width: 65em) {
+  @media screen and (min-width: ${breakPoints.tabletMin}) and (max-width: ${breakPoints.tabletMax}) {
     max-width: none;
     width: 92%;
     min-height: 50em;
@@ -186,7 +189,7 @@ export const Container = styled.section`
     }
   }
 
-  @media screen and (min-width: 0px) and (max-width: 575px) {
+  @media screen and (min-width: ${breakPoints.mobileMin}) and (max-width: ${breakPoints.mobileMax}) {
     max-width: none;
     width: 90%;
     font-size: 16px;
@@ -212,8 +215,8 @@ export const Container = styled.section`
       padding-top: 3vw;
     }
     ${ButtonReverse} {
-      top: -3.5rem;
-      right: 2em;
+      top: -2.5em;
+      right: 2vw;
     }
   }
 `;

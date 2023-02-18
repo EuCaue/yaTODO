@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { breakPoints } from '../../../../assets/styles/breakpoints';
 
 export const TextTodo = styled.p`
-  background-color: ${(props) => props.theme.secondary};
   display: flex;
   align-self: center;
   padding: 1vw 0 1vw 0;
@@ -13,6 +13,7 @@ export const TextTodo = styled.p`
   width: 70%;
   min-height: 10vh;
   font-size: 16px;
+  background-color: ${(props) => props.theme.secondary};
 `;
 
 export const ButtonTodoEdit = styled.button`
@@ -40,6 +41,13 @@ export const ButtonTodoCheck = styled.button`
 
 export const ButtonTodoEditCheck = styled(ButtonTodoEdit)``;
 
+export const FormEditTodo = styled.form`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.secondary};
+`;
+
 export const InputEditTodo = styled.input`
   z-index: 10;
   display: flex;
@@ -48,6 +56,7 @@ export const InputEditTodo = styled.input`
   align-items: center;
   text-align: center;
   flex-flow: row-reverse wrap;
+  font-weight: bold;
   max-width: 90%;
   min-height: 8vh;
   max-height: 10vh;
@@ -76,11 +85,13 @@ export const Container = styled.article`
   border-radius: 10px;
   position: relative;
   background-color: ${(props) => props.theme.secondary};
+  box-shadow: 0 0 1px 1px ${(props) => props.theme.text};
 
-  @media screen and (min-width: 36em) and (max-width: 70em) {
+  @media screen and (min-width: ${breakPoints.tabletMin}) and (max-width: ${breakPoints.tabletMax}) {
     max-width: 90%;
     min-width: 48%;
-    width: 48%;
+    width: 48.6%;
+
     ${TextTodo} {
       max-width: 90%;
       width: 63%;
@@ -89,14 +100,18 @@ export const Container = styled.article`
     }
 
     ${ButtonTodoEdit} {
-      right: 1vw;
+      right: 3%;
     }
     ${ButtonTodoCheck} {
-      right: 4vw;
+      right: 15%;
+    }
+
+    ${ButtonTodoEditCheck} {
+      z-index: 99;
     }
   }
 
-  @media screen and (min-width: 320px) and (max-width: 575px) {
+  @media screen and (min-width: ${breakPoints.mobileMin}) and (max-width: ${breakPoints.mobileMax}) {
     min-width: 75vw;
     min-height: 4.5rem;
     max-width: 85%;
@@ -114,9 +129,7 @@ export const Container = styled.article`
     }
 
     ${InputEditTodo} {
-      max-width: unset;
-      max-height: unset;
-      font-size: initial;
+      max-width: 50%;
     }
 
     ${ButtonTodoEditCheck} {
