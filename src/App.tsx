@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { RouterProvider } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,8 +15,8 @@ import {
 } from './assets/styles/themes';
 import { GlobalContext } from './utils/GlobalContext';
 
-import router from './routes';
 import Header from './components/Header';
+import Router from './routes';
 
 interface Themes {
   defaultDark: Colors;
@@ -45,15 +45,17 @@ export default function App(): JSX.Element {
   return (
     <GlobalContext.Provider value={themesMemo}>
       <ThemeProvider theme={theme}>
-        <Header />
-        <RouterProvider router={router} />
-        <GlobalStyles />
-        <ToastContainer
-          position="top-center"
-          autoClose={1200}
-          newestOnTop
-          hideProgressBar
-        />
+        <BrowserRouter>
+          <Header />
+          <Router />
+          <GlobalStyles />
+          <ToastContainer
+            position="top-center"
+            autoClose={1200}
+            newestOnTop
+            hideProgressBar
+          />
+        </BrowserRouter>
       </ThemeProvider>
     </GlobalContext.Provider>
   );

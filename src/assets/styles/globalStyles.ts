@@ -63,7 +63,6 @@ svg:hover {
 color: ${(props) => props.theme.text};
 background-color: ${(props) => props.theme.primary};
     text-align: center;
-
 }
 
 .Toastify__toast-icon {

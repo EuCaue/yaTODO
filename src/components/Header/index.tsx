@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { Link } from 'react-router-dom';
 import { HamburgerMenu, HeaderTodo, MenuList } from './styled';
 
 export default function Header(): JSX.Element {
@@ -17,12 +18,15 @@ export default function Header(): JSX.Element {
         />
       </HamburgerMenu>
 
-      <MenuList style={{ display: showMenuBurger ? 'flex' : 'none' }}>
+      <MenuList
+        style={{ display: showMenuBurger ? 'flex' : 'none' }}
+        onMouseLeave={() => setShowMenuBurger(false)}
+      >
         {window.location.pathname === '/' ? (
           false
         ) : (
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
         )}
 
@@ -30,20 +34,20 @@ export default function Header(): JSX.Element {
           false
         ) : (
           <li>
-            <a href="/app">yaTodo</a>
+            <Link to="/app">yaTodo</Link>
           </li>
         )}
         <li>
-          <a href="/settings">Settings</a>
+          <Link to="/settings">Settings</Link>
         </li>
         <li>
-          <a
-            href="https://github.com/EuCaue/yaTODO/"
+          <Link
+            to="https://github.com/EuCaue/yaTODO/"
             target="_blank"
             rel="noreferrer"
           >
             <FaGithub size={24} />
-          </a>
+          </Link>
         </li>
       </MenuList>
     </HeaderTodo>
