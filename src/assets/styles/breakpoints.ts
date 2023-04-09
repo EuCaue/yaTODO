@@ -9,5 +9,5 @@ export const breakPoints: BreakPointsI = {
   mobileMin: '0px',
   mobileMax: '575px',
   tabletMin: '36em',
-  tabletMax: '70em',
+  tabletMax: '70em'
 };

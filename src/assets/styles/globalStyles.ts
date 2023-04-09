@@ -4,7 +4,7 @@ interface Theme {
   primary: string;
   secondary: string;
   text: string;
-  highlight: string;
+  error: string;
   accentColor: string;
 }
 
@@ -21,7 +21,11 @@ export default createGlobalStyle<{ theme: Theme }>`
       background-color: ${(props) => props.theme.primary};
       color: ${(props) => props.theme.text};
 ::selection {
-      background-color: ${(props) => props.theme.highlight};
+      background-color: ${(props) => props.theme.accentColor};
+color: ${(props) =>
+  localStorage.getItem('currentTheme') === 'rosePineLightTheme'
+    ? props.theme.secondary
+    : props.theme.text};
   }
 }
 
@@ -50,6 +54,7 @@ button {
   cursor: pointer;
 }
 
+
 svg {
   background-color: transparent;
 }
@@ -58,21 +63,14 @@ svg:hover {
   fill: ${(props) => props.theme.accentColor};
 
 }
+.Toastify__toast-container {
+background-color: transparent;
+}
 
 .Toastify__toast {
 color: ${(props) => props.theme.text};
 background-color: ${(props) => props.theme.primary};
     text-align: center;
-}
-
-.Toastify__toast-icon {
-svg {
-fill: ${(props) => props.theme.text};
-:hover {
-  fill: ${(props) => props.theme.accentColor};
-
-}
-}
 }
 
 

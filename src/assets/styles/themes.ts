@@ -6,7 +6,7 @@ export interface Colors {
   secondary: string;
   text: string;
   accentColor: string;
-  highlight: string;
+  error: string;
 }
 
 export const defaultDark: Colors = {
@@ -14,7 +14,15 @@ export const defaultDark: Colors = {
   secondary: `${colors.secondaryDark}`,
   text: `${colors.textDefaultDark}`,
   accentColor: `${colors.accentColorDark}`,
-  highlight: `${colors.highlightDark}`,
+  error: `${colors.errorDark}`
+};
+
+export const darker: Colors = {
+  primary: `${colors.primaryDarker}`,
+  secondary: `${colors.secondaryDarker}`,
+  text: `${colors.textDarker}`,
+  accentColor: `${colors.accentColorDarker}`,
+  error: `${colors.errorDarker}`
 };
 
 export const defaultLight: Colors = {
@@ -22,7 +30,7 @@ export const defaultLight: Colors = {
   secondary: `${colors.secondaryLight}`,
   text: `${colors.textDefaultLight}`,
   accentColor: `${colors.accentColorLight}`,
-  highlight: `${colors.highlightLight}`,
+  error: `${colors.errorLight}`
 };
 
 export const rosePineDarkTheme: Colors = {
@@ -30,7 +38,7 @@ export const rosePineDarkTheme: Colors = {
   secondary: `${colors.surfaceDark}`,
   text: `${colors.textDark}`,
   accentColor: `${colors.pineDark}`,
-  highlight: `${colors.loveDark}`,
+  error: `${colors.loveDark}`
 };
 
 export const rosePineLightTheme: Colors = {
@@ -38,5 +46,5 @@ export const rosePineLightTheme: Colors = {
   secondary: `${colors.surfaceLight}`,
   text: `${colors.textLight}`,
   accentColor: `${colors.pineLight}`,
-  highlight: `${colors.loveLight}`,
+  error: `${colors.loveLight}`
 };

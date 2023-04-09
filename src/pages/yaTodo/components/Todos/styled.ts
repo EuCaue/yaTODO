@@ -1,140 +1,222 @@
+/* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 import { breakPoints } from '../../../../assets/styles/breakpoints';
 
-export const TextTodo = styled.p`
-  display: flex;
-  align-self: center;
-  padding: 1vw 0 1vw 0;
-  justify-content: center;
-  align-items: center;
-  flex-flow: row-reverse wrap;
-  text-align: center;
-  max-width: 90%;
-  width: 70%;
-  min-height: 10vh;
-  font-size: 16px;
-  background-color: ${(props) => props.theme.secondary};
-`;
+type Props = {
+  reversedList: boolean;
+};
 
-export const ButtonTodoEdit = styled.button`
-  display: flex;
-  justify-content: right;
-  align-self: center;
-  align-items: center;
-  background-color: initial;
-  cursor: pointer;
-  position: absolute;
-  padding-right: 0.2vw;
-  right: 0vw;
-`;
-
-export const ButtonTodoCheck = styled.button`
+export const Form = styled.form`
   display: flex;
   justify-content: center;
+  gap: 1vw;
+  align-items: center;
   align-self: center;
-  align-items: center;
-  background-color: initial;
-  cursor: pointer;
-  position: absolute;
-  right: 2vw;
+  margin-top: 1vw;
+  width: 90%;
+  svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
-export const ButtonTodoEditCheck = styled(ButtonTodoEdit)``;
-
-export const FormEditTodo = styled.form`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme.secondary};
-`;
-
-export const InputEditTodo = styled.input`
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  text-align: center;
-  flex-flow: row-reverse wrap;
-  font-weight: bold;
-  max-width: 90%;
-  min-height: 8vh;
-  max-height: 10vh;
-  background-color: ${(props) => props.theme.secondary};
-  color: ${(props) => props.theme.text};
-`;
-
-export const Container = styled.article`
+export const InputTodo = styled.input`
   display: flex;
   justify-content: center;
   align-self: center;
   align-items: center;
   flex-wrap: wrap;
-  min-height: 10vh;
-  height: fit-content;
-  min-width: 25vw;
-  width: 25vw;
-  max-width: 25vw;
-  word-break: break-all;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  hyphens: auto;
-  break-inside: avoid;
-  overflow: hidden;
   text-align: center;
-  border-radius: 10px;
-  position: relative;
+  font-weight: 500;
+  min-width: 25vw;
+  width: 76%;
+  min-height: 6vh;
+  max-height: 7vh;
+  border-radius: 5px;
+  border: 1px solid ${(props) => props.theme.text};
+  color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.secondary};
-  box-shadow: 0 0 1px 1px ${(props) => props.theme.text};
+  :hover,
+  :focus,
+  :active {
+    border: 1px solid ${(props) => props.theme.accentColor};
+  }
+`;
 
+export const SubmitBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const DeleteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+`;
+
+export const TodoFlexWrapper = styled.section<Props>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: ${(props) => (props.reversedList ? 'row-reverse' : 'row')};
+  flex-wrap: ${(props) => (props.reversedList ? 'wrap-reverse' : 'wrap')};
+  gap: 2vw;
+  align-self: unset;
+  padding-top: 1vw;
+`;
+
+export const ButtonReverse = styled.button<Props>`
+  display: flex;
+  background: transparent;
+  position: absolute;
+  cursor: pointer;
+  top: 3vh;
+  right: -3.5vw;
+  rotate: 90deg;
+  svg {
+    fill: ${(props) =>
+      props.reversedList ? props.theme.accentColor : props.theme.text};
+    :hover {
+      fill: ${(props) => props.theme.accentColor};
+    }
+  }
+`;
+
+export const PopUpContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: column wrap;
+  top: 25%;
+  position: absolute;
+  min-width: 20vw;
+  border-radius: 7px;
+  min-height: 15vh;
+  padding: 1vw;
+  z-index: 100;
+  box-shadow: 1px 1px 1px 100vw rgba(0, 0, 0, 0.5);
+  background-blend-mode: color;
+  border: 1px solid ${(props) => props.theme.text};
+`;
+
+export const TextPopUp = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: row wrap;
+`;
+
+export const SpanPopUp = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  align-self: center;
+  flex-flow: row wrap;
+`;
+
+export const ButtonDeleteConfirm = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: row wrap;
+  :hover {
+    color: ${(props) => props.theme.accentColor};
+  }
+`;
+
+export const ButtonDeleteCancel = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-flow: row wrap;
+  :hover {
+    color: ${(props) => props.theme.error};
+  }
+`;
+
+export const Container = styled.section`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-flow: column wrap;
+  align-self: center;
+  margin-top: 0.5rem;
+  max-width: 80%;
+  width: 60%;
+  min-height: 88vh;
+  position: relative;
+  border-radius: 15px;
+  padding-bottom: 1rem;
+  border: 5px solid ${(props) => props.theme.text};
+
+  /* 576px ~ 1100px*/
   @media screen and (min-width: ${breakPoints.tabletMin}) and (max-width: ${breakPoints.tabletMax}) {
-    max-width: 90%;
-    min-width: 48%;
-    width: 48.6%;
+    max-width: none;
+    width: 92%;
+    min-height: 50em;
+    font-size: 16px;
 
-    ${TextTodo} {
-      max-width: 90%;
-      width: 63%;
-      padding: 1vw 0 1vw 0;
-      min-height: 1rem;
+    ${InputTodo} {
+      min-width: 75%;
+      min-height: 5.5vh;
     }
 
-    ${ButtonTodoEdit} {
-      right: 3%;
-    }
-    ${ButtonTodoCheck} {
-      right: 15%;
+    ${TodoFlexWrapper} {
+      width: 75vw;
+      padding-top: 3vw;
     }
 
-    ${ButtonTodoEditCheck} {
-      z-index: 99;
+    ${Form} {
+      width: 90%;
+      padding-top: 2.5vw;
+    }
+
+    ${ButtonReverse} {
+      top: calc(4vw + 0.1rem);
+      right: 0.5vw;
     }
   }
 
   @media screen and (min-width: ${breakPoints.mobileMin}) and (max-width: ${breakPoints.mobileMax}) {
-    min-width: 75vw;
-    min-height: 4.5rem;
-    max-width: 85%;
-    ${TextTodo} {
-      padding: 1vw 0 1vw 0;
-      min-height: 1rem;
+    max-width: none;
+    width: 90%;
+    font-size: 16px;
+    min-height: 170vw;
+    padding-bottom: 1rem;
+
+    ${DeleteButton} {
+      padding: 0.5vw;
     }
-    ${ButtonTodoEdit} {
-      bottom: 25%;
-      right: 2vw;
+    ${SubmitBtn} {
+      padding: 0.5vw;
     }
-    ${ButtonTodoCheck} {
-      bottom: 60%;
-      right: 2vw;
+    ${InputTodo} {
+      min-width: 75%;
+      min-height: calc(3.5rem - 4vw);
+    }
+    ${TodoFlexWrapper} {
+      padding-top: 5vw;
     }
 
-    ${InputEditTodo} {
-      max-width: 50%;
+    ${Form} {
+      width: 90%;
+      padding-top: 3vw;
     }
-
-    ${ButtonTodoEditCheck} {
-      right: 2vw;
-      top: 2vh;
+    ${ButtonReverse} {
+      top: 102%;
+      right: 0;
     }
   }
 `;

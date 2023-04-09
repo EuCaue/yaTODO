@@ -1,222 +1,121 @@
-/* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 import { breakPoints } from '../../../../assets/styles/breakpoints';
 
-type Props = {
-  reversedList: boolean;
-};
-
-export const Form = styled.form`
+export const TextTodo = styled.p`
   display: flex;
-  justify-content: center;
-  gap: 1vw;
-  align-items: center;
   align-self: center;
-  margin-top: 1vw;
-  width: 90%;
-  svg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-export const InputTodo = styled.input`
-  display: flex;
   justify-content: center;
-  align-self: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-flow: row-reverse wrap;
   text-align: center;
-  font-weight: 500;
-  min-width: 25vw;
-  width: 76%;
-  min-height: 6vh;
-  max-height: 7vh;
-  border-radius: 5px;
-  border: 1px solid ${(props) => props.theme.text};
-  color: ${(props) => props.theme.text};
+  flex-grow: 4;
+  margin-left: 15%;
+  max-width: 90%;
+  width: 70%;
+  min-height: 1rem;
+  font-size: 16px;
   background-color: ${(props) => props.theme.secondary};
-  :hover,
-  :focus,
-  :active {
-    border: 1px solid ${(props) => props.theme.accentColor};
-  }
 `;
 
-export const SubmitBtn = styled.button`
+export const ButtonTodoEdit = styled.button`
+  display: flex;
+  justify-content: right;
+  align-self: center;
+  align-items: center;
+  background-color: initial;
+  padding-right: 0.2rem;
+`;
+
+export const ButtonTodoCheck = styled.button`
   display: flex;
   justify-content: center;
   align-self: center;
   align-items: center;
-  cursor: pointer;
+  background-color: initial;
 `;
 
-export const DeleteButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: transparent;
+export const ButtonTodoEditCheck = styled(ButtonTodoEdit)`
+  padding: 0;
+  padding-left: 0.5rem;
 `;
 
-export const TodoFlexWrapper = styled.section<Props>`
+export const FormEditTodo = styled.form`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: ${(props) => (props.reversedList ? 'row-reverse' : 'row')};
-  flex-wrap: ${(props) => (props.reversedList ? 'wrap-reverse' : 'wrap')};
-  gap: 2vw;
-  align-self: unset;
-  padding-top: 1vw;
-`;
-
-export const ButtonReverse = styled.button<Props>`
-  display: flex;
-  background: transparent;
-  position: absolute;
-  cursor: pointer;
-  top: 3vh;
-  right: -3.5vw;
-  rotate: 90deg;
-  svg {
-    fill: ${(props) =>
-      props.reversedList ? props.theme.highlight : props.theme.text};
-    :hover {
-      fill: ${(props) => props.theme.accentColor};
-    }
-  }
-`;
-
-export const PopUpContainer = styled.div`
-  display: flex;
+  flex-grow: 1;
   align-items: center;
   justify-content: center;
   align-self: center;
-  flex-flow: column wrap;
-  top: 25%;
-  position: absolute;
-  min-width: 20vw;
-  border-radius: 7px;
-  min-height: 15vh;
-  padding: 1vw;
-  z-index: 100;
-  box-shadow: 1px 1px 1px 100vw rgba(0, 0, 0, 0.5);
-  background-blend-mode: color;
-  border: 1px solid ${(props) => props.theme.text};
-`;
-
-export const TextPopUp = styled.p`
-  display: flex;
   align-items: center;
-  justify-content: center;
-  align-self: center;
   flex-flow: row wrap;
+  max-width: 100%;
+  background-color: ${(props) => props.theme.secondary};
 `;
 
-export const SpanPopUp = styled.span`
+export const InputEditTodo = styled.textarea`
+  z-index: 10;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1vw;
-  align-self: center;
-  flex-flow: row wrap;
-`;
-
-export const ButtonDeleteConfirm = styled.button`
-  display: flex;
-  align-items: center;
   justify-content: center;
   align-self: center;
-  flex-flow: row wrap;
-  :hover {
-    color: ${(props) => props.theme.accentColor};
-  }
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  flex-grow: 2;
+  min-height: 8vh;
+  height: auto;
+  max-height: 10vh;
+  resize: none;
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.text};
 `;
 
-export const ButtonDeleteCancel = styled.button`
+export const Container = styled.article`
   display: flex;
-  align-items: center;
   justify-content: center;
   align-self: center;
-  flex-flow: row wrap;
-  :hover {
-    color: ${(props) => props.theme.highlight};
-  }
-`;
-
-export const Container = styled.section`
-  display: flex;
-  justify-content: start;
   align-items: center;
-  flex-flow: column wrap;
-  align-self: center;
-  margin-top: 2.5vw;
-  max-width: 80vw;
-  width: 57vw;
-  min-height: 88vh;
+  gap: 0.2rem;
+  min-height: 10vh;
+  height: fit-content;
+  padding: 0.3rem;
+  min-width: 25vw;
+  width: 25vw;
+  max-width: 25vw;
+  word-break: break-all;
+  text-align: center;
+  border-radius: 10px;
   position: relative;
-  border-radius: 15px;
-  padding-bottom: 1rem;
-  border: 5px solid ${(props) => props.theme.text};
+  background-color: ${(props) => props.theme.secondary};
+  box-shadow: 0 0 1px 1px ${(props) => props.theme.text};
 
-  /* 576px ~ 1100px*/
   @media screen and (min-width: ${breakPoints.tabletMin}) and (max-width: ${breakPoints.tabletMax}) {
-    max-width: none;
-    width: 92%;
-    min-height: 50em;
-    font-size: 16px;
+    max-width: 90%;
+    min-width: 45%;
+    width: 48.6%;
 
-    ${InputTodo} {
-      min-width: 75%;
-      min-height: 5.5vh;
+    ${InputEditTodo} {
+      width: 86%;
     }
 
-    ${TodoFlexWrapper} {
-      width: 75vw;
-      padding-top: 3vw;
-    }
-
-    ${Form} {
-      width: 90%;
-      padding-top: 2.5vw;
-    }
-
-    ${ButtonReverse} {
-      top: calc(4vw + 0.1rem);
-      right: 0.5vw;
+    ${TextTodo} {
+      max-width: 90%;
+      width: 63%;
+      padding: 1vw 0 1vw 0;
+      min-height: 1rem;
     }
   }
 
   @media screen and (min-width: ${breakPoints.mobileMin}) and (max-width: ${breakPoints.mobileMax}) {
-    max-width: none;
-    width: 90%;
-    font-size: 16px;
-    min-height: 170vw;
-    padding-bottom: 1rem;
-
-    ${DeleteButton} {
-      padding: 0.5vw;
+    min-width: 75vw;
+    min-height: 4.5rem;
+    max-width: 85%;
+    ${TextTodo} {
+      /* padding: 1vw 0 1vw 0; */
+      /* min-height: 1rem; */
     }
-    ${SubmitBtn} {
-      padding: 0.5vw;
-    }
-    ${InputTodo} {
-      min-width: 75%;
-      min-height: calc(3.5rem - 4vw);
-    }
-    ${TodoFlexWrapper} {
-      padding-top: 5vw;
-    }
-
-    ${Form} {
-      width: 90%;
-      padding-top: 3vw;
-    }
-    ${ButtonReverse} {
-      top: -2.5em;
-      right: 2vw;
+    ${InputEditTodo} {
+      font-size: 16px;
+      max-width: 88%;
     }
   }
 `;

@@ -1,11 +1,11 @@
 import React from 'react';
-import Todo from './components/Todo';
+import Todos from './components/Todos';
 import { Main } from './styled';
 
 export default function YaTodo() {
   return (
     <Main>
-      <Todo />
+      <Todos />
     </Main>
   );
 }

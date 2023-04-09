@@ -1,7 +1,11 @@
 import React from 'react';
-import { Container, DivPara, LinkStyled } from './styled';
+import { useAuthContext } from '../../utils/AuthProvider';
+
+import { Container, DivPara, LinkStyled, SpanLinks } from './styled';
 
 export default function Home(): JSX.Element {
+  const { user } = useAuthContext();
+
   return (
     <Container>
       <DivPara>
@@ -10,9 +14,23 @@ export default function Home(): JSX.Element {
           todo app
         </p>
       </DivPara>
-      <LinkStyled to="/app" target="_self">
-        Go to the app
-      </LinkStyled>
+      <SpanLinks>
+        {user ? (
+          <LinkStyled to="/app" target="_self">
+            Go to the app
+          </LinkStyled>
+        ) : (
+          <>
+            <LinkStyled to="/login" target="_self">
+              Login
+            </LinkStyled>
+
+            <LinkStyled to="/register" target="_self">
+              Register
+            </LinkStyled>
+          </>
+        )}
+      </SpanLinks>
     </Container>
   );
 }

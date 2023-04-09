@@ -17,7 +17,7 @@ export const Container = styled.section`
   justify-content: center;
   align-items: center;
   align-self: center;
-  border: 1px solid ${(props) => props.theme.highlight};
+  border: 1px solid ${(props) => props.theme.error};
   height: 50vh;
   width: 50vw;
   margin: auto;

@@ -7,7 +7,7 @@ export interface GlobalContextInterface {
 
 export const GlobalContext = React.createContext<GlobalContextInterface>({
   currentTheme: 'defaultDark',
-  setCurrentTheme: () => {},
+  setCurrentTheme: () => {}
 });
 
 export const useGlobalContext = () => useContext(GlobalContext);

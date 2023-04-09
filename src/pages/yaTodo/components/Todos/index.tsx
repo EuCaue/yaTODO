@@ -1,128 +1,154 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useRef, useState } from 'react';
-import { FaCheck, FaEdit } from 'react-icons/fa';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { FaPlus, FaRegTrashAlt, FaExchangeAlt } from 'react-icons/fa';
+import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import CryptJS from 'crypto-js';
+
+import { toast } from 'react-toastify';
 import {
   Container,
-  ButtonTodoCheck,
-  InputEditTodo,
-  ButtonTodoEditCheck,
-  ButtonTodoEdit,
-  TextTodo,
-  FormEditTodo,
+  DeleteButton,
+  Form,
+  InputTodo,
+  SubmitBtn,
+  TodoFlexWrapper,
+  ButtonReverse,
+  PopUpContainer,
+  TextPopUp,
+  ButtonDeleteCancel,
+  ButtonDeleteConfirm,
+  SpanPopUp
 } from './styled';
+import Todo from '../Todo';
+import { db, secretKey } from '../../../../services/firebase';
+import { useAuthContext } from '../../../../utils/AuthProvider';
+import Loading from '../../../../components/Loading';
+import { isWhiteSpace } from '../../../../utils/utils';
 
-export interface ITodo {
-  index: number;
-  todo: string;
-  indexState: number;
-  setTodos: (todosArray: string[]) => void;
-  setIndexState: (currentIndex: number) => void;
-}
-export default function Todos({
-  index,
-  todo,
-  setTodos,
-  indexState,
-  setIndexState,
-}: ITodo): JSX.Element {
-  const $inputEditTodo = useRef<HTMLInputElement>(null);
-  const $formEditTodo = useRef<HTMLFormElement>(null);
-  const $buttonEditTodoCheck = useRef<HTMLButtonElement>(null);
-  const $buttonEditTodo = useRef<HTMLButtonElement>(null);
-  const $currentTextTodo = useRef<HTMLParagraphElement>(null);
-  const $buttonCheckTodo = useRef<HTMLButtonElement>(null);
-  const [newTodoText, setNewTodoText] = useState<string>('');
-  const todosLocal: string[] = JSON.parse(
-    localStorage.getItem('todosLocal') || '[]',
-  );
+type TodosDB = string[];
 
-  const handleClickCheck = (): void => {
-    todosLocal.splice(index, 1);
-    setTodos(todosLocal);
-  };
+export default function Todos(): JSX.Element {
+  const { user } = useAuthContext();
+  const usersCollection = collection(db, '/', 'users');
+  const usersDoc = doc(usersCollection, user?.uid);
+  const [todosDB, setTodosDB] = useState<TodosDB>([]);
+  const [todo, setTodo] = useState<string>('');
+  const [, updateState] = React.useState<unknown>();
+  const [reversedList, setReversedList] = useState<boolean>(false);
+  const [showPopUp, setShowPopUp] = useState<boolean>(false);
+  const [hasRun, setHasRun] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const forceUpdate = useCallback(() => updateState({}), []);
+  const $inputTodo = useRef<HTMLInputElement>(null);
 
-  const handleSubmitNewTodo = (event?: React.FormEvent): void => {
-    event?.preventDefault();
-    if (newTodoText === '' || newTodoText === ' ') {
-      $buttonEditTodoCheck.current!.style.display = 'none';
-      $formEditTodo.current!.style.display = 'none';
-      $inputEditTodo.current!.style.display = 'none';
-      $buttonEditTodo.current!.style.display = 'flex';
-      $currentTextTodo.current!.style.display = 'flex';
-      $buttonCheckTodo.current!.style.display = 'flex';
-    } else {
-      todosLocal.splice(indexState, 1, newTodoText);
-      setNewTodoText('');
-      setTodos(todosLocal);
-
-      $buttonEditTodoCheck.current!.style.display = 'none';
-      $inputEditTodo.current!.style.display = 'none';
-      $formEditTodo.current!.style.display = 'none';
-      $buttonEditTodo.current!.style.display = 'flex';
-      $currentTextTodo.current!.style.display = 'flex';
-      $buttonCheckTodo.current!.style.display = 'flex';
+  async function handleSubmit(event: React.FormEvent): Promise<void> {
+    event.preventDefault();
+    if (isWhiteSpace(todo)) {
+      toast.error('Todo Input is empty!');
+      $inputTodo.current!.value = '';
+      return;
     }
-  };
 
-  const handleClickEdit = (): void => {
-    setIndexState(index);
-    $buttonEditTodoCheck.current!.style.display = 'flex';
-    $formEditTodo.current!.style.display = 'flex';
-    $inputEditTodo.current!.style.display = 'flex';
-    $inputEditTodo.current!.value = todo;
-    $inputEditTodo.current?.focus();
-    $inputEditTodo.current!.selectionStart =
-      $inputEditTodo.current!.value.length;
-    $inputEditTodo.current!.selectionEnd = $inputEditTodo.current!.value.length;
-    $buttonEditTodo.current!.style.display = 'none';
-    $currentTextTodo.current!.style.display = 'none';
-    $buttonCheckTodo.current!.style.display = 'none';
-  };
+    todosDB.push(todo.trim());
+    forceUpdate();
+    if ($inputTodo.current) {
+      $inputTodo.current!.value = '';
+      $inputTodo.current?.focus();
+    }
+    await updateDoc(usersDoc, {
+      todos: CryptJS.AES.encrypt(JSON.stringify(todosDB), secretKey).toString()
+    });
+  }
+
+  async function handleClickDeleteConfirm(): Promise<void> {
+    setLoading(true);
+    todosDB.splice(0, todosDB.length);
+    await updateDoc(usersDoc, { todos: todosDB });
+    setShowPopUp(!showPopUp);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    if (!hasRun) {
+      const getTodos = async () => {
+        const response = await getDoc(usersDoc);
+        const todosResponse = JSON.parse(
+          CryptJS.AES.decrypt(response.data()?.todos, secretKey).toString(
+            CryptJS.enc.Utf8
+          )
+        );
+        setTodosDB(todosResponse);
+      };
+      getTodos();
+      setHasRun(true);
+    }
+  }, [todosDB.length, usersDoc, hasRun]);
+
+  const todosMap: JSX.Element[] = todosDB.map(
+    (todoText: string, index: number): JSX.Element => {
+      return (
+        <Todo
+          todo={todoText}
+          index={index}
+          key={CryptJS.lib.WordArray.random(4).words[0]}
+          setTodosDB={setTodosDB}
+          todosDB={todosDB}
+        />
+      );
+    }
+  );
 
   return (
     <Container>
-      <TextTodo ref={$currentTextTodo}>{todo}</TextTodo>
-      <ButtonTodoCheck
-        type="button"
-        onClick={handleClickCheck}
-        ref={$buttonCheckTodo}
-      >
-        <FaCheck />
-      </ButtonTodoCheck>
-      <ButtonTodoEdit
-        ref={$buttonEditTodo}
-        type="button"
-        onClick={handleClickEdit}
-      >
-        <FaEdit />
-      </ButtonTodoEdit>
-
-      <FormEditTodo
-        style={{ display: 'none' }}
-        ref={$formEditTodo}
-        onSubmit={(e) => handleSubmitNewTodo(e)}
-      >
-        <InputEditTodo
-          ref={$inputEditTodo}
-          type="text"
-          style={{ display: 'none' }}
-          // value={}
-          onChange={(e) => setNewTodoText(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.code === 'Enter' || e.code === 'NumpadEnter')
-              handleSubmitNewTodo();
-          }}
-          required
-        />
-        <ButtonTodoEditCheck
-          ref={$buttonEditTodoCheck}
-          style={{ display: 'none' }}
-          type="submit"
-          onClick={handleSubmitNewTodo}
+      <Form onSubmit={(e) => handleSubmit(e)} id="formTodo">
+        <DeleteButton
+          type="button"
+          title="Delete all todos"
+          onClick={() => setShowPopUp(!showPopUp)}
         >
-          <FaEdit />
-        </ButtonTodoEditCheck>
-      </FormEditTodo>
+          <FaRegTrashAlt size={34} />
+        </DeleteButton>
+        <InputTodo
+          placeholder='"Pet the cat"'
+          title="Type a todo here"
+          autoFocus
+          required
+          form="formTodo"
+          onChange={(e) => setTodo(e.target.value)}
+          ref={$inputTodo}
+        />
+        <SubmitBtn type="submit">
+          <FaPlus size={34} />
+        </SubmitBtn>
+      </Form>
+      <PopUpContainer style={{ display: showPopUp ? 'flex' : 'none' }}>
+        <TextPopUp>Do you want to delete all todos?</TextPopUp>
+        <SpanPopUp>
+          <ButtonDeleteConfirm
+            type="button"
+            onClick={() => handleClickDeleteConfirm()}
+          >
+            OK
+          </ButtonDeleteConfirm>
+          <ButtonDeleteCancel
+            type="button"
+            onClick={() => setShowPopUp(!showPopUp)}
+          >
+            Cancel
+          </ButtonDeleteCancel>
+        </SpanPopUp>
+      </PopUpContainer>
+
+      <TodoFlexWrapper reversedList={reversedList}>{todosMap}</TodoFlexWrapper>
+
+      <ButtonReverse
+        type="button"
+        onClick={() => setReversedList(!reversedList)}
+        title="Reverse the todos order?"
+        reversedList={reversedList}
+      >
+        <FaExchangeAlt size={34} />
+      </ButtonReverse>
+      <Loading isLoading={loading} />
     </Container>
   );
 }
