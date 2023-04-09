@@ -35,7 +35,6 @@ export default function RecoveryAccount(): JSX.Element {
         message: `A password recovery email has been sent to ${email}`
       });
     } catch (error) {
-      console.log(error);
       setStatus({
         ...status,
         isLoading: false,

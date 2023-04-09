@@ -101,7 +101,6 @@ export default function UserSettings({
   const storageRef = ref(storage, `${user!.uid}/profilePicture.jpg`);
   const iconSize = 25;
 
-  console.log('bomdia');
   function isFirebaseError(error: unknown): error is FirebaseError {
     return (error as FirebaseError).code !== undefined;
   }

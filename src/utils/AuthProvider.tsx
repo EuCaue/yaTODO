@@ -29,7 +29,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     setIsLoading(true);
     const unsubscribe = auth.onAuthStateChanged((firebaseUser: User | null) => {
-      console.log(firebaseUser);
       if (firebaseUser) {
         setUserPhoto(firebaseUser.photoURL);
         setUser(firebaseUser);
