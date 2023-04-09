@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { FirebaseError } from 'firebase/app';
 import isEmail from 'validator/lib/isEmail';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
@@ -17,7 +16,7 @@ import {
 import Loading from '../../components/Loading';
 import InputForm from '../../components/InputForm';
 import ButtonSubmit from '../../components/ButtonSubmit';
-import { auth } from '../../services/firebase';
+import { auth, isFirebaseError } from '../../services/firebase';
 
 export default function Login(): JSX.Element {
   const [email, setEmail] = useState<string>('');
@@ -26,9 +25,6 @@ export default function Login(): JSX.Element {
   const [buttonError, setButtonError] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  const isFirebaseError = (error: unknown): error is FirebaseError =>
-    (error as FirebaseError).code !== undefined;
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();

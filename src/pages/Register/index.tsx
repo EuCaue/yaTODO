@@ -8,7 +8,7 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 import Loading from '../../components/Loading';
-import { auth, db } from '../../services/firebase';
+import { auth, db, isFirebaseError } from '../../services/firebase';
 import {
   ButtonShowPassword,
   Container,
@@ -68,9 +68,6 @@ export default function Register() {
       setButtonError(false);
     }
   };
-  function isFirebaseError(error: unknown): error is FirebaseError {
-    return (error as FirebaseError).code !== undefined;
-  }
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     try {

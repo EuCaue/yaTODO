@@ -25,7 +25,7 @@ import {
   deleteObject
 } from 'firebase/storage';
 import InputForm from '../../components/InputForm';
-import { db, storage } from '../../services/firebase';
+import { db, isFirebaseError, storage } from '../../services/firebase';
 import {
   SettingsItem,
   ButtonEditInputStyled,
@@ -100,10 +100,6 @@ export default function UserSettings({
   const $formCurrentPassword = useRef<HTMLFormElement>(null);
   const storageRef = ref(storage, `${user!.uid}/profilePicture.jpg`);
   const iconSize = 25;
-
-  function isFirebaseError(error: unknown): error is FirebaseError {
-    return (error as FirebaseError).code !== undefined;
-  }
 
   const handleChangeName = async (event?: React.FormEvent): Promise<void> => {
     event?.preventDefault();

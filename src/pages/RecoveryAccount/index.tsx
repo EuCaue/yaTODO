@@ -1,11 +1,10 @@
-import { FirebaseError } from 'firebase/app';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import React, { useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 import ButtonSubmit from '../../components/ButtonSubmit';
 import InputForm from '../../components/InputForm';
 import Loading from '../../components/Loading';
-import { auth } from '../../services/firebase';
+import { auth, isFirebaseError } from '../../services/firebase';
 import { Container, Form } from './styled';
 
 export default function RecoveryAccount(): JSX.Element {
@@ -17,10 +16,6 @@ export default function RecoveryAccount(): JSX.Element {
     isLoading: false,
     message: ''
   });
-
-  function isFirebaseError(error: unknown): error is FirebaseError {
-    return (error as FirebaseError).code !== undefined;
-  }
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
