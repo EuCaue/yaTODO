@@ -19,7 +19,7 @@ export const SettingsContainer = styled.ul`
   flex-flow: column wrap;
   justify-content: flex-start;
   width: 62%;
-  height: 39.5rem;
+  height: 90vh;
   list-style-type: none;
   border-radius: 15px;
   position: relative;

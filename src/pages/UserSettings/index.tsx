@@ -17,7 +17,6 @@ import {
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-import { FirebaseError } from 'firebase/app';
 import {
   getDownloadURL,
   ref,
@@ -28,17 +27,16 @@ import InputForm from '../../components/InputForm';
 import { db, isFirebaseError, storage } from '../../services/firebase';
 import {
   SettingsItem,
-  ButtonEditInputStyled,
   Form,
   ButtonShowPassword,
   ButtonShowDelete,
   UserImage,
   SpanImage,
-  DeletePhotoContainer,
-  DeletePhotoText,
-  DeleteButtonSpan
+  ButtonEditInputStyled,
+  UserContainer
 } from './styled';
 import { useAuthContext } from '../../utils/AuthProvider';
+import PopUp from '../../components/PopUp';
 
 interface ButtonEditProps {
   iconSize: number;
@@ -264,62 +262,44 @@ export default function UserSettings({
     <>
       <SettingsItem>
         <Form onSubmit={(e) => e.preventDefault()}>
-          <label htmlFor="profile-picture" className="profile-label">
-            Change Profile Picture:
-          </label>
-
-          {userPhoto === null ? (
-            <label
-              htmlFor="profile-picture"
-              style={{ cursor: 'pointer' }}
-              className="user-icon"
-            >
-              <SpanImage userPhoto={userPhoto}>
-                <FaUserCircle size={103} />
-              </SpanImage>
+          <UserContainer>
+            <label htmlFor="profile-picture" className="profile-label">
+              Change Profile Picture:
             </label>
-          ) : (
-            <>
-              <label htmlFor="profile-picture">
-                <SpanImage>
-                  <UserImage
-                    src={userPhoto}
-                    alt="User"
-                    width="100px"
-                    height="100px"
-                  />
+
+            {userPhoto === null ? (
+              <label
+                htmlFor="profile-picture"
+                style={{ cursor: 'pointer' }}
+                className="user-icon"
+              >
+                <SpanImage userPhoto={userPhoto}>
+                  <FaUserCircle size={103} />
                 </SpanImage>
               </label>
+            ) : (
+              <>
+                <label htmlFor="profile-picture">
+                  <SpanImage>
+                    <UserImage
+                      src={userPhoto}
+                      alt="User"
+                      width="100px"
+                      height="100px"
+                    />
+                  </SpanImage>
+                </label>
 
-              <ButtonShowDelete
-                type="button"
-                title="Delete Profile Picture?"
-                onClick={() => setShowDeletePhoto(!showDeletePhoto)}
-              >
-                <FaTrashAlt size={iconSize} />
-              </ButtonShowDelete>
-
-              <DeletePhotoContainer
-                style={{ display: showDeletePhoto ? 'flex' : 'none' }}
-              >
-                <DeletePhotoText>
-                  Are you sure you want to delete the profile picture?
-                </DeletePhotoText>
-
-                <DeleteButtonSpan>
-                  <button type="button" onClick={deleteUserImage}>
-                    OK
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowDeletePhoto(!showDeletePhoto)}
-                  >
-                    Cancel
-                  </button>
-                </DeleteButtonSpan>
-              </DeletePhotoContainer>
-            </>
-          )}
+                <ButtonShowDelete
+                  type="button"
+                  title="Delete Profile Picture?"
+                  onClick={() => setShowDeletePhoto(!showDeletePhoto)}
+                >
+                  <FaTrashAlt size={iconSize} />
+                </ButtonShowDelete>
+              </>
+            )}
+          </UserContainer>
 
           <InputForm
             type="file"
@@ -448,6 +428,13 @@ export default function UserSettings({
           />
         </Form>
       </SettingsItem>
+
+      <PopUp
+        setShowPopUp={setShowDeletePhoto}
+        showPopUp={showDeletePhoto}
+        handleConfirm={deleteUserImage}
+        arrayText={['Are you sure you want do delete the profile picture?']}
+      />
     </>
   );
 }

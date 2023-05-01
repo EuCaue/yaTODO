@@ -11,18 +11,14 @@ import {
   InputTodo,
   SubmitBtn,
   TodoFlexWrapper,
-  ButtonReverse,
-  PopUpContainer,
-  TextPopUp,
-  ButtonDeleteCancel,
-  ButtonDeleteConfirm,
-  SpanPopUp
+  ButtonReverse
 } from './styled';
 import Todo from '../Todo';
 import { db, secretKey } from '../../../../services/firebase';
 import { useAuthContext } from '../../../../utils/AuthProvider';
 import Loading from '../../../../components/Loading';
 import { isWhiteSpace } from '../../../../utils/utils';
+import PopUp from '../../../../components/PopUp';
 
 type TodosDB = string[];
 
@@ -59,13 +55,13 @@ export default function Todos(): JSX.Element {
     });
   }
 
-  async function handleClickDeleteConfirm(): Promise<void> {
+  const handleClickDeleteConfirm = async (): Promise<void> => {
     setLoading(true);
     todosDB.splice(0, todosDB.length);
     await updateDoc(usersDoc, { todos: todosDB });
     setShowPopUp(!showPopUp);
     setLoading(false);
-  }
+  };
 
   useEffect(() => {
     if (!hasRun) {
@@ -120,23 +116,14 @@ export default function Todos(): JSX.Element {
           <FaPlus size={34} />
         </SubmitBtn>
       </Form>
-      <PopUpContainer style={{ display: showPopUp ? 'flex' : 'none' }}>
-        <TextPopUp>Do you want to delete all todos?</TextPopUp>
-        <SpanPopUp>
-          <ButtonDeleteConfirm
-            type="button"
-            onClick={() => handleClickDeleteConfirm()}
-          >
-            OK
-          </ButtonDeleteConfirm>
-          <ButtonDeleteCancel
-            type="button"
-            onClick={() => setShowPopUp(!showPopUp)}
-          >
-            Cancel
-          </ButtonDeleteCancel>
-        </SpanPopUp>
-      </PopUpContainer>
+
+      <PopUp
+        setShowPopUp={setShowPopUp}
+        showPopUp={showPopUp}
+        // eslint-disable-next-line react/jsx-no-bind
+        handleConfirm={handleClickDeleteConfirm}
+        arrayText={['Do you want to delete all todos?']}
+      />
 
       <TodoFlexWrapper reversedList={reversedList}>{todosMap}</TodoFlexWrapper>
 

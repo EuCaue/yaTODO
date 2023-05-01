@@ -16,19 +16,16 @@ export const SettingsItem = styled.li`
 export const Form = styled.form`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-flow: row nowrap;
   width: 65%;
 
   label {
-    width: 13rem;
+    width: max-content;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     cursor: text;
-  }
-  label:nth-last-of-type(2) {
-    width: 19rem;
   }
 
   input {
@@ -41,14 +38,8 @@ export const Form = styled.form`
     }
   }
 
-  .user-icon {
-    width: auto;
-    margin-right: 13rem;
-  }
-
   @media screen and (min-width: ${breakPoints.tabletMin}) and (max-width: ${breakPoints.tabletMax}) {
     width: 75%;
-    /* flex-flow: row wrap; */
 
     button {
       right: 6%;
@@ -121,6 +112,28 @@ export const ButtonShowPassword = styled(ButtonEditInputStyled)`
   right: 18%;
 `;
 
+export const UserContainer = styled.span`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* gap: 10%; */
+  width: 45%;
+
+  @media screen and (min-width: ${breakPoints.mobileMin}) and (max-width: ${breakPoints.mobileMax}) {
+    width: 100%;
+    gap: 0.5rem;
+    flex-flow: column wrap;
+
+    button {
+      position: static !important;
+      svg {
+        width: 75%;
+        height: 75%;
+      }
+    }
+  }
+`;
+
 export const UserImage = styled.img`
   display: flex;
   align-items: center;
@@ -156,62 +169,4 @@ export const SpanImage = styled.span<User>`
 
 export const ButtonShowDelete = styled(ButtonEditInputStyled)`
   right: 12.5%;
-`;
-
-export const DeletePhotoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column wrap;
-  text-align: center;
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  min-height: 15%;
-  z-index: 20;
-  border-radius: 7px;
-  padding: 1rem;
-  background-color: ${(props) => props.theme.secondary};
-  box-shadow: 1px 1px 1px 100vw ${(props) => `${props.theme.primary}90`};
-  border: 1px solid ${(props) => props.theme.text};
-
-  @media screen and (min-width: ${breakPoints.mobileMin}) and (max-width: ${breakPoints.mobileMax}) {
-    width: 90%;
-    box-shadow: 1px 1px 1px 100vh ${(props) => `${props.theme.primary}90`};
-  }
-`;
-
-export const DeletePhotoText = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  background-color: ${(props) => props.theme.secondary};
-`;
-
-export const DeleteButtonSpan = styled.span`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  align-self: center;
-  flex-flow: row nowrap;
-  width: auto;
-  gap: 1rem;
-  background-color: ${(props) => props.theme.secondary};
-  button {
-    position: static !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    background-color: ${(props) => props.theme.secondary};
-    :first-child:hover {
-      color: ${(props) => props.theme.accentColor};
-    }
-    :hover {
-      color: ${(props) => props.theme.error};
-    }
-  }
 `;

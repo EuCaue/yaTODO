@@ -116,7 +116,7 @@ export const UserList = styled.ul`
   list-style-type: none;
   z-index: 20;
   text-align: center;
-  top: 2.4rem;
+  top: 2.9rem;
   min-width: 9rem;
   width: max-content;
   right: 1.7rem;

@@ -14,7 +14,7 @@ export default createGlobalStyle<{ theme: Theme }>`
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      font-size: 18px;
+      font-size: 20px;
       outline: 0;
       border: none;
       transition: all 0.2s linear;

@@ -60,9 +60,9 @@ export const InputEditTodo = styled.textarea`
   text-align: center;
   font-weight: bold;
   flex-grow: 2;
-  min-height: 8vh;
-  height: auto;
-  max-height: 10vh;
+  min-height: 7vh;
+  height: fit-content;
+  /* max-height: 10vh; */
   resize: none;
   border-radius: 5px;
   background-color: ${(props) => props.theme.primary};
@@ -75,7 +75,7 @@ export const Container = styled.article`
   align-self: center;
   align-items: center;
   gap: 0.2rem;
-  min-height: 10vh;
+  min-height: 7vh;
   height: fit-content;
   padding: 0.3rem;
   min-width: 25vw;

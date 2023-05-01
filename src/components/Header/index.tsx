@@ -90,7 +90,7 @@ export default function Header(): JSX.Element {
               style={{ borderRadius: '50%' }}
             />
           ) : (
-            <FaUserCircle size={34} />
+            <FaUserCircle size={50} />
           )}
         </button>
         <UserList

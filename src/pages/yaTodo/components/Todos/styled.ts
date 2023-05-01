@@ -31,7 +31,7 @@ export const InputTodo = styled.input`
   font-weight: 500;
   min-width: 25vw;
   width: 76%;
-  min-height: 6vh;
+  min-height: 5vh;
   max-height: 7vh;
   border-radius: 5px;
   border: 1px solid ${(props) => props.theme.text};
@@ -89,63 +89,6 @@ export const ButtonReverse = styled.button<Props>`
   }
 `;
 
-export const PopUpContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  flex-flow: column wrap;
-  top: 25%;
-  position: absolute;
-  min-width: 20vw;
-  border-radius: 7px;
-  min-height: 15vh;
-  padding: 1vw;
-  z-index: 100;
-  box-shadow: 1px 1px 1px 100vw rgba(0, 0, 0, 0.5);
-  background-blend-mode: color;
-  border: 1px solid ${(props) => props.theme.text};
-`;
-
-export const TextPopUp = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  flex-flow: row wrap;
-`;
-
-export const SpanPopUp = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1vw;
-  align-self: center;
-  flex-flow: row wrap;
-`;
-
-export const ButtonDeleteConfirm = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  flex-flow: row wrap;
-  :hover {
-    color: ${(props) => props.theme.accentColor};
-  }
-`;
-
-export const ButtonDeleteCancel = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  flex-flow: row wrap;
-  :hover {
-    color: ${(props) => props.theme.error};
-  }
-`;
-
 export const Container = styled.section`
   display: flex;
   justify-content: start;
@@ -161,7 +104,6 @@ export const Container = styled.section`
   padding-bottom: 1rem;
   border: 5px solid ${(props) => props.theme.text};
 
-  /* 576px ~ 1100px*/
   @media screen and (min-width: ${breakPoints.tabletMin}) and (max-width: ${breakPoints.tabletMax}) {
     max-width: none;
     width: 92%;
