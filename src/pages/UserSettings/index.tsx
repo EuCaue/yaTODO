@@ -24,6 +24,7 @@ import {
   deleteObject
 } from 'firebase/storage';
 import InputForm from '../../components/InputForm';
+import { useAuthContext } from '../../utils/AuthProvider';
 import { db, isFirebaseError, storage } from '../../services/firebase';
 import {
   SettingsItem,
@@ -35,7 +36,6 @@ import {
   ButtonEditInputStyled,
   UserContainer
 } from './styled';
-import { useAuthContext } from '../../utils/AuthProvider';
 import PopUp from '../../components/PopUp';
 
 interface ButtonEditProps {
@@ -263,7 +263,10 @@ export default function UserSettings({
       <SettingsItem>
         <Form onSubmit={(e) => e.preventDefault()}>
           <UserContainer>
-            <label htmlFor="profile-picture" className="profile-label">
+            <label
+              htmlFor="profile-picture"
+              className="profile-label"
+            >
               Change Profile Picture:
             </label>
 

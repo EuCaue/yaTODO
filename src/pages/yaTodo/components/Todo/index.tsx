@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { collection, doc, updateDoc } from 'firebase/firestore';
 import React, { useRef, useState } from 'react';
 import CryptJS from 'crypto-js';
@@ -6,15 +5,7 @@ import { FaCheck, FaEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { db, secretKey } from '../../../../services/firebase';
 import { useAuthContext } from '../../../../utils/AuthProvider';
-import {
-  Container,
-  ButtonTodoCheck,
-  InputEditTodo,
-  ButtonTodoEditCheck,
-  ButtonTodoEdit,
-  TextTodo,
-  FormEditTodo
-} from './styled';
+import { Container, ButtonTodoCheck, ButtonTodoEdit, TextTodo } from './styled';
 import { isWhiteSpace } from '../../../../utils/utils';
 
 export interface ITodo {
@@ -29,19 +20,15 @@ export default function Todos({
   setTodosDB,
   todosDB
 }: ITodo): JSX.Element {
-  const $inputEditTodo = useRef<HTMLTextAreaElement>(null);
-  const $formEditTodo = useRef<HTMLFormElement>(null);
-  const $buttonEditTodoCheck = useRef<HTMLButtonElement>(null);
   const $buttonEditTodo = useRef<HTMLButtonElement>(null);
   const $currentTextTodo = useRef<HTMLParagraphElement>(null);
   const $buttonCheckTodo = useRef<HTMLButtonElement>(null);
-  const [newTodoText, setNewTodoText] = useState<string>('');
   const [indexState, setIndexState] = useState<number>(0);
   const { user } = useAuthContext();
   const usersCollection = collection(db, '/', 'users');
   const usersDoc = doc(usersCollection, user?.uid);
 
-  const handleClickCheck = async (): Promise<void> => {
+  const handleCheckTodo = async (): Promise<void> => {
     todosDB.splice(index, 1);
     setTodosDB([...todosDB]);
     await updateDoc(usersDoc, {
@@ -49,94 +36,65 @@ export default function Todos({
     });
   };
 
-  const handleSubmitNewTodo = async (
-    event?: React.FormEvent
-  ): Promise<void> => {
-    event?.preventDefault();
-    if (isWhiteSpace(newTodoText)) {
-      $buttonEditTodoCheck.current!.style.display = 'none';
-      $formEditTodo.current!.style.display = 'none';
-      $inputEditTodo.current!.style.display = 'none';
-      $buttonEditTodo.current!.style.display = 'flex';
-      $currentTextTodo.current!.style.display = 'flex';
-      $buttonCheckTodo.current!.style.display = 'flex';
-      toast.error('New todo is empty!!');
-    } else {
-      todosDB.splice(indexState, 1, newTodoText.trim());
-      setTodosDB([...todosDB]);
-      setNewTodoText('');
-      $buttonEditTodoCheck.current!.style.display = 'none';
-      $inputEditTodo.current!.style.display = 'none';
-      $formEditTodo.current!.style.display = 'none';
-      $buttonEditTodo.current!.style.display = 'flex';
-      $currentTextTodo.current!.style.display = 'flex';
-      $buttonCheckTodo.current!.style.display = 'flex';
-      await updateDoc(usersDoc, {
-        todos: CryptJS.AES.encrypt(
-          JSON.stringify(todosDB),
-          secretKey
-        ).toString()
-      });
+  const handleUpdateTodo = async (): Promise<void> => {
+    if (
+      $currentTextTodo.current &&
+      $currentTextTodo.current.textContent !== null
+    ) {
+      if ($currentTextTodo.current.contentEditable === 'inherit') {
+        setIndexState(index);
+        $currentTextTodo.current.contentEditable = 'true';
+        $currentTextTodo.current.focus();
+      } else {
+        if (isWhiteSpace($currentTextTodo.current.textContent.trim())) {
+          toast.error('New todo is empty!!');
+          $currentTextTodo.current.textContent = '';
+          $currentTextTodo.current.focus();
+          return;
+        }
+        $currentTextTodo.current.contentEditable = 'inherit';
+        todosDB.splice(indexState, 1, $currentTextTodo.current.innerText);
+        setTodosDB([...todosDB]);
+        await updateDoc(usersDoc, {
+          todos: CryptJS.AES.encrypt(
+            JSON.stringify(todosDB),
+            secretKey
+          ).toString()
+        });
+      }
     }
-  };
-
-  const handleClickEdit = (): void => {
-    setIndexState(index);
-    $buttonEditTodoCheck.current!.style.display = 'flex';
-    $formEditTodo.current!.style.display = 'flex';
-    $inputEditTodo.current!.style.display = 'flex';
-    $inputEditTodo.current!.value = todo;
-    $inputEditTodo.current?.focus();
-    $inputEditTodo.current!.selectionStart =
-      $inputEditTodo.current!.value.length;
-    $inputEditTodo.current!.selectionEnd = $inputEditTodo.current!.value.length;
-    $buttonEditTodo.current!.style.display = 'none';
-    $currentTextTodo.current!.style.display = 'none';
-    $buttonCheckTodo.current!.style.display = 'none';
   };
 
   return (
     <Container>
-      <TextTodo ref={$currentTextTodo}>{todo}</TextTodo>
+      <TextTodo
+        onKeyDown={(e) => {
+          if ((e.code === 'Enter' || e.code === 'NumpadEnter') && !e.shiftKey)
+            handleUpdateTodo();
+        }}
+        ref={$currentTextTodo}
+        title={todo}
+      >
+        {todo}
+      </TextTodo>
+
       <ButtonTodoCheck
         type="button"
-        onClick={handleClickCheck}
+        onClick={handleCheckTodo}
         ref={$buttonCheckTodo}
+        title="Click Here to mark the TODO done!"
       >
         <FaCheck />
       </ButtonTodoCheck>
+
       <ButtonTodoEdit
         ref={$buttonEditTodo}
         type="button"
-        onClick={handleClickEdit}
+        onClick={handleUpdateTodo}
+        title="Click Here to edit the TODO!"
       >
         <FaEdit />
       </ButtonTodoEdit>
-
-      <FormEditTodo
-        style={{ display: 'none' }}
-        ref={$formEditTodo}
-        onSubmit={(e) => handleSubmitNewTodo(e)}
-      >
-        <InputEditTodo
-          ref={$inputEditTodo}
-          style={{ display: 'none' }}
-          onChange={(e) => setNewTodoText(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.code === 'Enter' || e.code === 'NumpadEnter')
-              handleSubmitNewTodo();
-          }}
-          required
-        />
-        <ButtonTodoEditCheck
-          ref={$buttonEditTodoCheck}
-          style={{ display: 'none' }}
-          type="submit"
-          onClick={handleSubmitNewTodo}
-        >
-          <FaEdit />
-        </ButtonTodoEditCheck>
-      </FormEditTodo>
     </Container>
   );
 }

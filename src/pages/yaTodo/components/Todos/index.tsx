@@ -95,7 +95,10 @@ export default function Todos(): JSX.Element {
 
   return (
     <Container>
-      <Form onSubmit={(e) => handleSubmit(e)} id="formTodo">
+      <Form
+        onSubmit={(e) => handleSubmit(e)}
+        id="formTodo"
+      >
         <DeleteButton
           type="button"
           title="Delete all todos"
@@ -120,7 +123,6 @@ export default function Todos(): JSX.Element {
       <PopUp
         setShowPopUp={setShowPopUp}
         showPopUp={showPopUp}
-        // eslint-disable-next-line react/jsx-no-bind
         handleConfirm={handleClickDeleteConfirm}
         arrayText={['Do you want to delete all todos?']}
       />

@@ -15,13 +15,15 @@ export interface IPopUP {
   arrayText: string[];
 }
 
+// TODO: make this use modal or dialog
+
 export default function PopUp({
   setShowPopUp,
   handleConfirm,
   showPopUp,
   arrayText
 }: IPopUP) {
-  const mapText = arrayText.map((text) => {
+  const mapText: JSX.Element[] = arrayText.map((text: string) => {
     return (
       <>
         <span>{text}</span>
@@ -33,7 +35,10 @@ export default function PopUp({
     <PopUpContainer style={{ display: showPopUp ? 'flex' : 'none' }}>
       <TextPopUp>{mapText}</TextPopUp>
       <SpanPopUp>
-        <ButtonDeleteConfirm type="button" onClick={handleConfirm}>
+        <ButtonDeleteConfirm
+          type="button"
+          onClick={handleConfirm}
+        >
           OK
         </ButtonDeleteConfirm>
         <ButtonDeleteCancel
